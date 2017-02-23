@@ -40,10 +40,15 @@ Setting up your Database
 With a new Django project, you should first tell Django about the database you intend to use (i.e. configure DATABASES in settings.py). You can also register any models in the admin.py module of your app to make them accessible via the admin interface.
 Adding a Model
 The workflow for adding models can be broken down into five steps.
+
 1.	First, create your new model(s) in your Django application’s models.py file.
+
 2.	Update admin.py to include and register your new model(s).
+
 3.	Perform the migration `$ python manage.py makemigrations <app_name>`.
+
 4.	Apply the changes `$ python manage.py migrate`. This will create the necessary infrastructure within the database for your new model(s).
+
 5.	Create/edit your population script for your new model(s).
 
 ##### Invariably, there will be times when you will have to delete your database. When this happens, run the following commands from the manage.py module.
