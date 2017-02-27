@@ -27,14 +27,18 @@ urlpatterns = [
     url(r'^list/(?P<list_name_slug>[\w\-]+)/$', views.list, name='list'),
     # ?? DO WE ACTUALLY NEED THE BELOW URL??
     # replace w scripting?
-    url(r'^list/(?P<list_name_slug>[\w\-]+)/add-item/$', views.add_item, name='add_item'),
-    url(r'^list/(?P<list_name_slug>[\w\-]+)/(?P<item_name_slug>[\w\-]+)/$', views.item, name='item'),
+    url(r'^list/(?P<list_name_slug>[\w\-]+)/add-item/$', views.add_item,
+        name='add_item'),
+    url(r'^list/(?P<list_name_slug>[\w\-]+)/(?P<item_name_slug>[\w\-]+)/$',
+        views.item, name='item'),
 
 
     #
-    # url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.show_category, name='show_category'),
+    # url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.show_category,
+    #   name='show_category'),
     #
-    # url(r'^category/(?P<category_name_slug>[\w\-]+)/add_page/$', views.add_page, name='add_page'),
+    # url(r'^category/(?P<category_name_slug>[\w\-]+)/add_page/$',
+    #   views.add_page, name='add_page'),
     #
     # url(r'^register/$', views.register, name='register'),
     # url(r'^login/$', views.user_login, name='login'),
