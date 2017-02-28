@@ -4,8 +4,6 @@ from django.db import models
 
 from django.template.defaultfilters import slugify
 
-from django.contrib.auth.models import User
-
 # Create your models here.
 
 class List(models.Model):
@@ -26,10 +24,10 @@ class List(models.Model):
 class ListItem(models.Model):
     max = 128
     title = models.CharField(max_length = max)
-    date = models.DateField
-    priority = models.Charfield(max_length = 30)
-    status = models.Charfield(max_length = 30)
-    notes = models.Charfield(max_length = 999)
+    date = models.DateField()
+    priority = models.CharField(max_length = 30)
+    status = models.CharField(max_length = 30)
+    notes = models.CharField(max_length = 999)
     list = models.ForeignKey(List)
 
     def __str__(self):
@@ -37,3 +35,29 @@ class ListItem(models.Model):
 
     def __unicode__(self):
         return self.title
+
+
+class Bank(models.Model):
+    max = 128
+    title = models.CharField(max_length=max)
+
+    def __str__(self):
+        return self.title
+
+    def __unicode__(self):
+        return self.title
+
+
+class BankItem(models.Model):
+    max = 128
+    title = models.CharField(max_length=max)
+    bank = models.ForeignKey(Bank)
+
+    def __str__(self):
+        return self.title
+
+    def __unicode__(self):
+        return self.title
+
+
+
