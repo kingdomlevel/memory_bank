@@ -1,0 +1,9 @@
+#listBoard {
+	width: 900px; height: 600px;
+	border-style: solid; border-color: black;
+}
+
+#listContainer {
+	width: 200px; height: 200px;
+	background: red;
+}
