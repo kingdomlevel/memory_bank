@@ -4,20 +4,48 @@
 
 <html>
 
-	<head>
-		<title>memoryBank - test list</title>
+<head>
+	<title>memoryBank - test list</title>
 
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.min.js"></script>
-		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
-		<script type="text/javascript" src="{% static 'memoryBankApp/dragdrop.js' %}"></script>
+	<!-- CDN -->
+	<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+	integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+	crossorigin="anonymous"></script>
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
-		<link rel="stylesheet" type="text/css" href="{% static 'memoryBankApp/style.css' %}" />
-	</head>
 
-	<body>
-		<div id="listBoard" class="list-board">
-			<div id="listContainer" class="list-container"></div>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.2.6/gridstack.min.css" />
+	<link rel="stylesheet" type="text/css" href="{% static 'memoryBankApp/style.css' %}" />
+	<script type="text/javascript" src='//cdnjs.cloudflare.com/ajax/libs/gridstack.js/0.2.6/gridstack.min.js'></script>
+
+	<script type="text/javascript">
+		$(function () {
+			var options = {
+				cellHeight: 80,
+				verticalMargin: 10
+			};
+			$('.grid-stack').gridstack(options);
+		});
+	</script>
+
+
+
+</head>
+
+<body>
+	<div class="grid-stack">
+		<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">
+			<div class="grid-stack-item-content"></div>
 		</div>
-	</body>
+		<div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
+			<div class="grid-stack-item-content"></div>
+		</div>
+	</div>
+
+</body>
 
 </html>
