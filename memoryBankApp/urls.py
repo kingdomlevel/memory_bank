@@ -8,6 +8,7 @@ from memoryBankApp import views
 urlpatterns = [
     # public site admin
     url(r'^$', views.index, name='index'),
+    url(r'^testlist/$', views.testlist, name='testlist')
     # url(r'about/', views.about, name='about'),
     # url(r'contact/', views.contact, name='contact'),
     # url(r'faq/', views.faq, name='faq'),
