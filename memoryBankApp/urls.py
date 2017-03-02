@@ -10,12 +10,12 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
 
     url(r'^testlist/$', views.testlist, name='testlist'),
-    # url(r'about/', views.about, name='about'),
-    # url(r'contact/', views.contact, name='contact'),
-    # url(r'faq/', views.faq, name='faq'),
+    url(r'about/', views.about, name='about'),
+    url(r'contact/', views.contact, name='contact'),
+    url(r'faq/', views.faq, name='faq'),
 
 
-    # # user acccount stuff -NOTE - This should now be handled with registration Redux
+    # # user acccount stuff no longer necessary -NOTE - This should now be handled with registration Redux
     # url(r'^register/$', views.register, name='register'),
     # url(r'^login/$', views.user_login, name='login'),
     # url(r'^logout/$', views.user_logout, name='logout'),

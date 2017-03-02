@@ -27,7 +27,7 @@ class MyRegistrationView(RegistrationView):
         return '/memorybank/'
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    #url(r'^$', views.index, name='index'),
     url(r'^memorybank/', include('memoryBankApp.urls')),
     url(r'^admin/', admin.site.urls),
     #From Tango p138

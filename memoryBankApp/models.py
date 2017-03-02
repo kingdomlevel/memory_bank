@@ -13,6 +13,14 @@ class List(models.Model):
     #may need to add 'unique=True' to the title parameters if
     #we have issues
     title = models.CharField(max_length = max)
+    #slug = models.SlugField(unique=True)
+
+    def save(self,*args, **kwargs):
+        self.slug = slugify(self.name)
+        super(List,self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name_plural = 'lists'
 
     def __str__(self):
         return self.title
