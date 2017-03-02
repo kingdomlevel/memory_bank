@@ -1,3 +1,36 @@
+
 <!DOCYTYPE html>
-{% load staticfiles %} -->
-{% load memoryBankApp_template_tags %}
+<html>
+    <head>
+        <title>
+        {% block title_block %}
+                page title (e.g 'home', 'list'
+        {% endblock %}
+        </title>
+    </head>
+    <body>
+        <div>
+            {% block body_block %}
+            {% endblock %}
+        </div>
+        <hr/>
+        <div>
+            {% block sidebar_block %}
+                note: If we want a 'Sidebar' on each page add here
+                (use template tags for this)
+            {% endblock %}
+        </div>
+    <div>
+        <ul>
+            {% if user.is_authenticated %}
+                you are logged in as {{user.username}}
+                <li><a href="{% url 'auth_logout' %}">Logout</a><li>
+            {% else %}
+                <li><a href="{% url 'auth_login' %}">Login</a><li>
+            {% endif %}
+            <li><a href="{% url 'home' %}">Home</a></li>
+        </ul>
+    </div>
+    </body>
+
+</html>

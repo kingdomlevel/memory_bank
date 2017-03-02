@@ -1,4 +1,7 @@
 from django.shortcuts import render
+from registration.backends.simple.views import RegistrationView
+
+
 
 # Create your views here.
 
@@ -13,9 +16,15 @@ def index(request):
 	# visitor_cookie_handler(request)
 	# context_dict['visits'] = request.session['visits']
 
-	response = render(request, 'memoryBankApp/index.html')
-	return response
 
+    response = render(request, 'memoryBankApp/index.html')
+    return response
+
+def home(request):
+    print(request.method)
+    print(request.user)
+    #response = render(request, 'memoryBankApp/home.html')
+    return render(request, 'memoryBankApp/home.html',{})
 
 def testlist(request):
 	return render(request, 'memoryBankApp/testlist.html')

@@ -61,3 +61,4 @@ class BankItem(models.Model):
 
 
 
+

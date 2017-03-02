@@ -8,19 +8,23 @@ from memoryBankApp import views
 urlpatterns = [
     # public site admin
     url(r'^$', views.index, name='index'),
-    url(r'^testlist/$', views.testlist, name='testlist')
+
+    url(r'^testlist/$', views.testlist, name='testlist'),
     # url(r'about/', views.about, name='about'),
     # url(r'contact/', views.contact, name='contact'),
     # url(r'faq/', views.faq, name='faq'),
 
-    # # user acccount stuff
+
+    # # user acccount stuff -NOTE - This should now be handled with registration Redux
     # url(r'^register/$', views.register, name='register'),
     # url(r'^login/$', views.user_login, name='login'),
     # url(r'^logout/$', views.user_logout, name='logout'),
+
+
     # url(r'^settings/$', views.settings, name='settings'),
     #
     # # user's personalised pages
-    # url(r'^home/$', views.home, name='home'),
+     url(r'^home/$', views.home, name='home'),
     # url(r'^new-list/$', views.new_list, name='new_list'),
     # url(r'^create-bank/$', views.create_bank, name='create_bank'),
     # # ?? DO WE ACTUALLY NEED THE BELOW URL??

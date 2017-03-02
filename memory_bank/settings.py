@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
-#LOGIN_URL = '/memorybank/login/'
+LOGIN_URL = '/accounts/login/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    'registration', # add in the registration package
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -129,3 +130,21 @@ MEDIA_URL = '/media/'
 
 #Not sure about this login setting
 #LOGIN_URL = '/memorybank/login/'
+
+#From rango chapter 11, relating to 'registration redux', see page138
+
+REGISTRATION_OPEN = True
+
+# One-week activation window;
+ACCOUNT_ACTIVATION_DAYS = 7
+
+# If True, the user will be automatically logged in.
+REGISTRATION_AUTO_LOGIN = True
+
+# The page you want users to arrive at after they successfully log in
+LOGIN_REDIRECT_URL = '/memorybank/'
+
+# The page users are directed to if they are not logged in,
+# and are trying to access pages requiring authentication
+
+LOGIN_URL = '/accounts/login/'
