@@ -12,7 +12,8 @@ class List(models.Model):
 
     #may need to add 'unique=True' to the title parameters if
     #we have issues
-    title = models.CharField(max_length = max)
+
+    title = models.CharField(max_length=max)
     #slug = models.SlugField(unique=True)
 
     def save(self,*args, **kwargs):
@@ -31,11 +32,12 @@ class List(models.Model):
 
 class ListItem(models.Model):
     max = 128
-    title = models.CharField(max_length = max)
+    title = models.CharField(max_length=max)
     date = models.DateField()
-    priority = models.CharField(max_length = 30)
-    status = models.CharField(max_length = 30)
-    notes = models.CharField(max_length = 999)
+    priority = models.CharField(max_length=30)
+    #status = models.CharField(max_length = 30)
+    notes_max = 999
+    notes = models.CharField(max_length=notes_max)
     list = models.ForeignKey(List)
 
     def __str__(self):

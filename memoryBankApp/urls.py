@@ -13,6 +13,10 @@ urlpatterns = [
     url(r'about/', views.about, name='about'),
     url(r'contact/', views.contact, name='contact'),
     url(r'faq/', views.faq, name='faq'),
+    url(r'^testform/$', views.testform, name='testform'),
+    # url(r'about/', views.about, name='about'),
+    # url(r'contact/', views.contact, name='contact'),
+    # url(r'faq/', views.faq, name='faq'),
 
 
     # # user acccount stuff no longer necessary -NOTE - This should now be handled with registration Redux
