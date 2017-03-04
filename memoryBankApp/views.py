@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from registration.backends.simple.views import RegistrationView
 from memoryBankApp.forms import ListForm
+from memoryBankApp.models import List, ListItem
+
+
 
 
 # Create your views here.
