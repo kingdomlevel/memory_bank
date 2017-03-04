@@ -31,14 +31,14 @@ class List(models.Model):
 
 
 class ListItem(models.Model):
-    list = models.ForeignKey(List)
+    list = models.ForeignKey(List, on_delete=models.CASCADE)
     max = 128
     title = models.CharField(max_length=max)
-    date = models.DateField(null=True)
-    priority = models.CharField(max_length=30, null=True)
-    status = models.CharField(max_length = 30, null=True)
+    date = models.DateField(null=True, blank=True)
+    priority = models.CharField(max_length=30, null=True, blank=True)
+    status = models.CharField(max_length = 30, null=True, blank=True)
     notes_max = 999
-    notes = models.CharField(max_length=notes_max, null=True)
+    notes = models.CharField(max_length=notes_max, null=True, blank=True)
 
     def __str__(self):
         return self.title

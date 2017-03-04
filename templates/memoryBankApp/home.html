@@ -3,5 +3,25 @@
     Home Title
 {% endblock %}
 {% block body_block %}
-
+<h1>All Lists</h1>
+<div>
+    {% if allLists %}
+    <ul>
+        {% for List in allLists %}
+        <li><h4>{{List.title}}</h4></li>
+        <ul>
+            {% for item in List.listitem_set.all  %}
+            {% if item %}
+            <li>{{ item.title }} </li>
+            {% else %}
+            <li> no items in this! </li>
+            {% endif %}
+            {% endfor  %}
+        </ul>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <h3> you don't have any lists yet</h3>
+    {% endif %}
+</div>
 {% endblock %}

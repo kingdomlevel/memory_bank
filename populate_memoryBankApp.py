@@ -14,13 +14,13 @@ def populate():
         {"title": "Noodles"},
         {"title": "lager"}]
 
-    college_items =[
-        {"title:" "learn binary search trees"},
-        {"title:" "pass all exams"},
-        {"title:" "go for a pint"}]
+  #  college_items =[
+   #     {"title:" "learn binary search trees"},
+    #    {"title:" "pass all exams"},
+     #   {"title:" "go for a pint"}]
 
-    lists = {"Shopping": {"items": shopping_items},
-            "College": {"items": college_items}}
+    lists = {"Shopping": {"items": shopping_items}}
+           # "College": {"items": college_items}}
 
     for list, list_data in lists.iteritems():
         l = add_list(lists)

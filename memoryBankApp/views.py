@@ -24,14 +24,16 @@ def index(request):
 	return response
 
 def home(request):
-	print(request.method)
-	#print(request.user)
-	#response = render(request, 'memoryBankApp/home.html')
-	return render(request, 'memoryBankApp/home.html',{})
+	allLists = List.objects.all()
+	context_dict = {'allLists': allLists,}
+	return render(request, 'memoryBankApp/home.html', context_dict)
 
 
 def testlist(request):
-	return render(request, 'memoryBankApp/testlist.html')
+	list1 = List.objects.get(pk=1)
+	list2 = List.objects.get(pk=2)
+	context_dict = {'list1': list1, 'list2': list2 }
+	return render(request, 'memoryBankApp/testlist.html', context_dict)
 
 
 def about(request):
