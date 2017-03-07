@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from registration.backends.simple.views import RegistrationView
-from memoryBankApp.forms import ListForm
+from memoryBankApp.forms import ListForm, ListItemForm
 from memoryBankApp.models import List, ListItem
 
 
@@ -30,8 +30,8 @@ def home(request):
 
 
 def testlist(request):
-	list1 = List.objects.get(pk=1)
-	list2 = List.objects.get(pk=2)
+	list1 = List.objects.get(pk=4)
+	list2 = List.objects.get(pk=5)
 	context_dict = {'list1': list1, 'list2': list2 }
 	return render(request, 'memoryBankApp/testlist.html', context_dict)
 
@@ -50,6 +50,34 @@ def contact(request):
 
 def testform(request):
 	form = ListForm()
+	if request.method == 'POST':
+		form = ListForm(request.POST)
+		# check validity of form
+		if form.is_valid():
+			# save new list to database
+			form.save(commit=True)
+			# return to user's home page
+			return home(request)
+		else:
+			# print errors to the terminal
+			print(form.errors)
+
 	context_dict = {'form': form}
 	return render(request, 'memoryBankApp/testform.html', context_dict)
 
+def testitemform(request):
+	form = ListItemForm()
+	if request.method == 'POST':
+		form = ListItemForm(request.POST)
+		# check validity of form
+		if form.is_valid():
+			# save new list to database
+			form.save(commit=True)
+			# return to user's home page
+			return home(request)
+		else:
+			# print errors to the terminal
+			print(form.errors)
+
+	context_dict = {'form': form}
+	return render(request, 'memoryBankApp/testitemform.html', context_dict)
