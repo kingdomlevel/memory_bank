@@ -41,22 +41,24 @@
 
 	<div class="grid-stack">
 		{% for list in allLists %}
-			{% if list %}
-				<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="2" data-gs-height="3">
-					<div class="grid-stack-item-content">
-						<h4>{{list.title}}</h4>
-						{% for item in list.listitem_set.all  %}
-		           			{% if item %}
-		            			<li>{{ item.title }}</li>
-			           		 {% else %}
-			           			 <li>No items!</li>
-			            	{% endif %}
-	           			{% endfor  %}
-					</div>
+			<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="2" data-gs-height="3">
+				<div class="grid-stack-item-content">
+					<h4>{{ list.title }}</h4>
+					<ul>
+					{% for item in list.listitem_set.all  %}
+	            		<li>{{ item.title }}</li>
+	            	{% empty %}
+	            		<li>No items</li>
+           			{% endfor  %}
+           			</ul>
 				</div>
-			{% else %}
-				No lists
-			{% endif %}
+			</div>
+		{% empty %}
+			<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="2" data-gs-height="3">
+				<div class="grid-stack-item-content">
+					No lists
+				</div>
+			</div>
 		{% endfor %}
 	</div>
 
