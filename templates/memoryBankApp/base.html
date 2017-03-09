@@ -1,41 +1,84 @@
 
 <!DOCYTYPE html>
 <html>
-    <head lang = "en">
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>
-        {% block title_block %}
-                page title (e.g 'home', 'list'
-        {% endblock %}
-        </title>
-    </head>
-    <body>
-        <div>
-            {% block body_block %}
-            {% endblock %}
-        </div>
-        <hr/>
-        <div>
-            {% block sidebar_block %}
-                note: If we want a 'Sidebar' on each page add here
-                (use template tags for this)
-            {% endblock %}
-        </div>
-    <div>
-        <ul>
-            {% if user.is_authenticated %}
-                you are logged in as {{user.username}}
-                <li><a href="{% url 'auth_logout' %}">Logout</a><li>
-            {% else %}
-                <li><a href="{% url 'auth_login' %}">Login</a><li>
-            {% endif %}
-            <li><a href="{% url 'home' %}">Home</a></li>
-        </ul>
-    </div>
-    </body>
+<head lang = "en">
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>
+      {% block title_block %}
+      page title (e.g 'home', 'list'
+      {% endblock %}
+   </title>
+
+   <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <!-- j-query library (for bootstrap) -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <!-- compiled javascript for bootstrap (??) -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+   <style>
+   /* override css stuff here*/
+   </style>
+</head>
+<body>
+   <div>
+      {% block body_block %}
+      {% endblock %}
+   </div>
+   <hr/>
+   <div id = "sidebar">
+      {% block sidebar_block %}
+      note: If we want a 'Sidebar' on each page add here
+      (use template tags for this)
+
+      <nav class = "navbar navbar-default">
+         <!-- if page width is too narrow, collapse navbar into a lil menu button at top right -->
+         <div class = "container-fluid">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                  <!-- 3 lines for menu icon -->
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+               </button>
+               <a href="{% url 'home' %}"><h4>• memoryBank •</h4></a>
+            </div>
+
+            <!-- collapsable elements of navbar -->
+            <div class="collapse navbar-collapse" id="myNavbar">
+
+               {% if user.is_authenticated %}
+
+               <ul class="nav navbar-nav navbar-right">
+                  <li>Logged in as {{ user.username }}</li>
+                  <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+
+
+                  {% else %}
+                  <!-- User not loggin in -->
+                  <li><a href="#" alt="make link to sign up page here?"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                  <li><a href="{% url 'auth_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                  {% endif %}
+               </ul>
+               <!-- Search: -->
+               <form class="navbar-form navbar-right">
+                  <div class="input-group">
+                     <input type="text" class="form-control" placeholder="Search">
+                     <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                           <i class="glyphicon glyphicon-search"></i>
+                        </button>
+                     </div>
+                  </div>
+               </form>
+
+
+            </div>
+         </div>
+      </nav>
+      {% endblock %}
+   </div>
+</body>
 
 </html>

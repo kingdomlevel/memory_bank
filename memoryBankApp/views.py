@@ -30,8 +30,8 @@ def home(request):
 
 
 def testlist(request):
-	list1 = List.objects.get(pk=4)
-	list2 = List.objects.get(pk=5)
+	list1 = List.objects.get(title='shredders')
+	list2 = List.objects.get(title='damagers')
 	context_dict = {'list1': list1, 'list2': list2 }
 	return render(request, 'memoryBankApp/testlist.html', context_dict)
 
