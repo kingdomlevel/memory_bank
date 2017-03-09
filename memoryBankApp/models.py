@@ -4,6 +4,8 @@ from django.db import models
 
 from django.template.defaultfilters import slugify
 
+from django.contrib.auth.models import User
+
 # Create your models here.
 
 class List(models.Model):
@@ -12,8 +14,10 @@ class List(models.Model):
 
     #may need to add 'unique=True' to the title parameters if
     #we have issues
-
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=max)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     #slug = models.SlugField(unique=True)
 
   #  def save(self,*args, **kwargs):

@@ -1,3 +1,12 @@
+.grid-stack {
+	background: blue;
+	overflow: hidden;
+}
+
+.grid-stack-item {
+	float: left;
+}
+
 .grid-stack-item-content {
     background: red;
     color: #2c3e50;
