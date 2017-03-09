@@ -15,10 +15,9 @@ class ListForm(forms.ModelForm):
 class ListItemForm(forms.ModelForm):
     title = forms.CharField(max_length=ListItem.max)
     #include a javascript datepicker for the date field
-    #priority_list = ['low', 'medium', 'high']
-    priority = forms.ChoiceField(choices=('low', 'medium', 'high'))
+    priority_list = [(1,'low'), (2,'medium'), (3,'high')]
+    priority = forms.ChoiceField(choices=priority_list)
     notes = forms.CharField(max_length=ListItem.notes_max)
-
 
     class Meta:
         model = ListItem
