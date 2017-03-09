@@ -37,7 +37,7 @@
                </button>
                <div class="col-sm-4"> </div>
                <!-- Application title: links to different stuff depending if user is logged in -->
-               <div class="col-sm-4">
+               <div class="col-sm-2">
                {% if user.is_authenticated %}
                   <a href="{% url 'home' %}"><h4> •memoryBank• </h4></a>
                {% else %}
@@ -53,7 +53,7 @@
                   <li><a href="{% url 'auth_logout' %}">Logout</a></li>
                {% else %}
                   <!-- User not loggin in -->
-                  <li><a href="#" alt="make link to sign up page here?"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                  <li><a href="{% url 'registration_register' %}" alt="make link to sign up page here?"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                   <li><a href="{% url 'auth_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                {% endif %}
                </ul>
