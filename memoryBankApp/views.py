@@ -18,7 +18,6 @@ def index(request):
 	# visitor_cookie_handler(request)
 	# context_dict['visits'] = request.session['visits']
 
-
 	response = render(request, 'memoryBankApp/index.html')
 	return response
 
@@ -28,31 +27,37 @@ def index(request):
 # 	context_dict = {'allLists': allLists,}
 # 	return render(request, 'memoryBankApp/home.html', context_dict)
 
+
 def home(request):
-    allLists = List.objects.filter(user = request.user)
-    allLists = allLists.order_by('-modified_date')
-    listCount = len(allLists) #gets total number of lists
-    context_dict = {'allLists': allLists, 'listCount':listCount}
-    return render(request, 'memoryBankApp/home.html', context_dict)
+	allLists = List.objects.filter(user=request.user)
+	allLists = allLists.order_by('-modified_date')
+	listCount = len(allLists)		# gets total number of lists
+	context_dict = {'allLists': allLists, 'listCount': listCount}
+	return render(request, 'memoryBankApp/home.html', context_dict)
+
 
 def testlist(request):
-	list1 = List.objects.get(pk=4)
-	list2 = List.objects.get(pk=5)
-	context_dict = {'list1': list1, 'list2': list2 }
+	allLists = List.objects.filter(user=request.user)
+	allLists = allLists.order_by('-modified_date')
+	listCount = len(allLists)		# gets total number of lists
+	context_dict = {'allLists': allLists, 'listCount': listCount}
 	return render(request, 'memoryBankApp/testlist.html', context_dict)
 
 
 def about(request):
 	print(request.method)
-	return render(request,'memoryBankApp/about.html',{})
+	return render(request, 'memoryBankApp/about.html', {})
+
 
 def faq(request):
 	print(request.method)
 	return render(request, 'memoryBankApp/faq.html', {})
 
+
 def contact(request):
 	print(request.method)
 	return render(request, 'memoryBankApp/contact.html', {})
+
 
 def testform(request):
 	form = ListForm()
@@ -75,6 +80,7 @@ def testform(request):
 
 	context_dict = {'form': form}
 	return render(request, 'memoryBankApp/testform.html', context_dict)
+
 
 def testitemform(request):
 	form = ListItemForm()

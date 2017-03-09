@@ -25,8 +25,9 @@
 	<script type="text/javascript">
 		$(function () {
 			var options = {
-				cellHeight: 80,
-				verticalMargin: 10
+				cellHeight: 60,
+				verticalMargin: 10,
+				width: 18
 			};
 			$('.grid-stack').gridstack(options);
 		});
@@ -37,32 +38,28 @@
 </head>
 
 <body>
-	<div class="grid-stack">
-		<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="4" data-gs-height="2">
-			<div class="grid-stack-item-content">
-				<h4>{{list2.title}}</h4>
-				{% for item in list2.listitem_set.all  %}
-           		 {% if item %}
-            		<li>{{ item.title }} </li>
-           		 {% else %}
-           			 <li> no items in this! </li>
-            		{% endif %}
-           		 {% endfor  %}
-			</div>
-		</div>
-		<div class="grid-stack-item" data-gs-x="4" data-gs-y="0" data-gs-width="4" data-gs-height="4">
-			<div class="grid-stack-item-content">
-				<h4>{{list1.title}}</h4>
-				{% for item in list1.listitem_set.all  %}
-           		 {% if item %}
-            		<li>{{ item.title }} </li>
-           		 {% else %}
-           			 <li> no items in this! </li>
-            		{% endif %}
-           		 {% endfor  %}
 
+	<div class="grid-stack">
+		{% for list in allLists %}
+			<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="2" data-gs-height="3">
+				<div class="grid-stack-item-content">
+					<h4>{{ list.title }}</h4>
+					<ul>
+					{% for item in list.listitem_set.all  %}
+	            		<li>{{ item.title }}</li>
+	            	{% empty %}
+	            		<li>No items</li>
+           			{% endfor  %}
+           			</ul>
+				</div>
 			</div>
-		</div>
+		{% empty %}
+			<div class="grid-stack-item" data-gs-x="0" data-gs-y="0" data-gs-width="2" data-gs-height="3">
+				<div class="grid-stack-item-content">
+					No lists
+				</div>
+			</div>
+		{% endfor %}
 	</div>
 
 </body>
