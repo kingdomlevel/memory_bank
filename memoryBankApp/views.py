@@ -58,10 +58,16 @@ def home(request):
 
 
 def testlist(request):
+<<<<<<< HEAD
+	list1 = List.objects.get(title='shredders')
+	list2 = List.objects.get(title='damagers')
+	context_dict = {'list1': list1, 'list2': list2 }
+=======
 	allLists = List.objects.filter(user=request.user)
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
 	context_dict = {'allLists': allLists, 'listCount': listCount}
+>>>>>>> be16258ae68e20fc806a5a0c4404d97ef2500e19
 	return render(request, 'memoryBankApp/testlist.html', context_dict)
 
 
