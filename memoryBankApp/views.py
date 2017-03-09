@@ -29,10 +29,31 @@ def index(request):
 
 
 def home(request):
+
+	form = ListItemForm()
+	if request.method == 'POST':
+		# pass the POST to form through forms.py
+		form = ListItemForm(request.POST)
+		print "SUBMITTED!!!"
+		if form.is_valid():
+			print form.fields
+			# pass the list ID from the POST to a variable
+			id = request.POST.get('listID')
+			print request.POST.get('listID')
+			# save the form to a variable but don't commit to database
+			newItem = form.save(commit=False)
+			# update the List attribute of list item
+			newItem.list_id = id
+			newItem.save()
+			pass
+		else:
+			# print errors to the terminal
+			print(form.errors)
+
 	allLists = List.objects.filter(user=request.user)
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
-	context_dict = {'allLists': allLists, 'listCount': listCount}
+	context_dict = {'allLists': allLists, 'listCount': listCount, 'form': form,}
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
 
