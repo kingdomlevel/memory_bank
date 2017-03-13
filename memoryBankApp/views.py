@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from registration.backends.simple.views import RegistrationView
-from memoryBankApp.forms import ListForm, ListItemForm
+from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm
 from memoryBankApp.models import List, ListItem
 from django.contrib.auth.models import User
-
+from django.shortcuts import get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 
@@ -30,44 +31,61 @@ def index(request):
 
 def home(request):
 
-	form = ListItemForm()
-	if request.method == 'POST':
+	newItemform = ListItemForm()
+	if request.method == 'POST' and 'submitAdd' in request.POST:
 		# pass the POST to form through forms.py
-		form = ListItemForm(request.POST)
+		newItemform = ListItemForm(request.POST)
 		print "SUBMITTED!!!"
-		if form.is_valid():
-			print form.fields
+		if newItemform.is_valid():
+			print newItemform.fields
 			# pass the list ID from the POST to a variable
 			id = request.POST.get('listID')
 			print request.POST.get('listID')
 			# save the form to a variable but don't commit to database
-			newItem = form.save(commit=False)
+			newItem = newItemform.save(commit=False)
 			# update the List attribute of list item
 			newItem.list_id = id
 			newItem.save()
 			pass
 		else:
 			# print errors to the terminal
-			print(form.errors)
+			print(newItemform.errors)
+
+	editItemForm = EditItemForm()
+
+
+
+	#instance = ListItem.objects.filter(user=request.user)
+	if request.method == 'POST' and 'submitEdit' in request.POST:
+		editItemForm = EditItemForm(request.POST)
+		if editItemForm.is_valid():
+			editItemForm.save()
+		else:
+			print(editItemForm.errors)
 
 	allLists = List.objects.filter(user=request.user)
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
-	context_dict = {'allLists': allLists, 'listCount': listCount, 'form': form,}
+	context_dict = {'allLists': allLists, 'listCount': listCount, 'form': newItemform, 'editItemForm':editItemForm}
 	return render(request, 'memoryBankApp/home.html', context_dict)
+
+def edit_item(request, id=None):
+	instance = get_object_or_404(ListItem, id=id)
+	editItemForm = EditItemForm(request.POST or None, instance=instance)
+	if editItemForm.is_valid():
+		instance = editItemForm.save(commit = False)
+		instance.save()
+		# return HttpResponse('memoryBankApp/home.html')
+	context = {'form':editItemForm, 'title': instance.title, }
+
+	return render(request,'memoryBankApp/edititem.html', context )
 
 
 def testlist(request):
-<<<<<<< HEAD
-	list1 = List.objects.get(title='shredders')
-	list2 = List.objects.get(title='damagers')
-	context_dict = {'list1': list1, 'list2': list2 }
-=======
 	allLists = List.objects.filter(user=request.user)
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
 	context_dict = {'allLists': allLists, 'listCount': listCount}
->>>>>>> be16258ae68e20fc806a5a0c4404d97ef2500e19
 	return render(request, 'memoryBankApp/testlist.html', context_dict)
 
 

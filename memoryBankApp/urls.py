@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'faq/', views.faq, name='faq'),
     url(r'^testform/$', views.testform, name='testform'),
     url(r'^testitemform/$', views.testitemform, name='testitemform'),
+    url(r'^(?P<id>\d+)/$', views.edit_item, name='edit_item'),
     # url(r'about/', views.about, name='about'),
     # url(r'contact/', views.contact, name='contact'),
     # url(r'faq/', views.faq, name='faq'),
