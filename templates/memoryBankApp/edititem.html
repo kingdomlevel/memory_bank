@@ -4,6 +4,15 @@
 {% endblock %}
 {% block body_block %}
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.submitDelete').click(function() {
+            $('#removeFormField').val('1');
+            document.getElementById("ListForm").submit();
+            #window.location.href = "memoryBankApp/home.html";
+       });
+    });
+</script>
 
 <form role="form" id="ListForm" method="post" action=".">
     <h2 class="form-signin-heading">EditItem</h2>
@@ -14,8 +23,10 @@
     {{ field.label }}<br/>
     {{ field }}<br/>
     {% endfor %}
+    <input type="hidden" id="removeFormField" value="0" name="removeFormField" />
     <br/>
-    <button class="btn btn-primary" type="submit" name="submit">Save</button>
+    <button class="btn btn-primary" type="submit" name="submitSave">Save</button>
+    <button type="button" class="btn btn-info btm-sm submitDelete" >Delete Item</button>
     <li><a href="{% url 'home' %}">return to your lists</a></li>
 </form>
 

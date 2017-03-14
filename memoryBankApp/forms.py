@@ -32,6 +32,7 @@ class EditItemForm(forms.ModelForm):
     notes = forms.CharField(widget=forms.Textarea,max_length=ListItem.notes_max, help_text="Any additional information?")
     date = forms.DateField(widget=forms.SelectDateWidget)
     completed = forms.BooleanField(label="Mark as Completed:", required=False)
+    removed = forms.BooleanField(label= "Mark for Deletion:", required=False)
     class Meta:
         model = ListItem
-        fields = ('title', 'priority', 'notes', 'completed', 'date',) #'priority', 'notes',)
+        fields = ('title', 'date', 'priority', 'notes', 'completed','removed',) #'priority', 'notes',)

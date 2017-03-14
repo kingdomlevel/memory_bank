@@ -79,13 +79,15 @@ def edit_item(request, id=None):
 	if (parentUser != request.user):
 		return HttpResponse("You are not authorised to access this content")
 	else:
+		#if request.method == 'POST' and 'submitSave' in request.POST:
 		editItemForm = EditItemForm(request.POST or None, instance=instance)
 		if editItemForm.is_valid():
+			remove = request.POST.get('removeFormField')
 			instance = editItemForm.save(commit = False)
+			instance.removed = remove
 			instance.save()
-			# return HttpResponse('memoryBankApp/home.html')
-		context = {'form':editItemForm, 'title': instance.title, }
-		return render(request,'memoryBankApp/edititem.html', context )
+	context = {'form':editItemForm, 'title': instance, }
+	return render(request,'memoryBankApp/edititem.html', context )
 
 def testlist(request):
 	allLists = List.objects.filter(user=request.user)
