@@ -53,7 +53,14 @@
             {% for item in List.listitem_set.all  %}
             {% if item %}
             <!--<li>{{ item.title }}</li>-->
+            {% if item.completed %}
+            <del>
             <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+            </del>
+            {% else %}
+            <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+            {% endif %}
+
             <!--<button type="button" class="btn btn-info btn-sm editButton" data-toggle="modal" data-target="#EditModal"-->
                 <!--item-title="{{ item.title }}" item-id="{{ item.id }}" item-notes="{{ item.notes }}"  >Edit</button>-->
             {% else %}

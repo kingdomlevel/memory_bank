@@ -18,10 +18,10 @@ class ListItemForm(forms.ModelForm):
     priority_list = [(1,'low'), (2,'medium'), (3,'high')]
     priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?")
     notes = forms.CharField(widget=forms.Textarea, max_length=ListItem.notes_max, help_text="Any additional information?")
-
+    date = forms.DateField(widget=forms.SelectDateWidget)
     class Meta:
         model = ListItem
-        fields = ('title', 'priority', 'notes',) #'priority', 'notes',)
+        fields = ('title', 'priority', 'notes', 'date', ) #'priority', 'notes',)
 
 
 class EditItemForm(forms.ModelForm):
@@ -30,7 +30,8 @@ class EditItemForm(forms.ModelForm):
     priority_list = [(1,'low'), (2,'medium'), (3,'high')]
     priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?")
     notes = forms.CharField(widget=forms.Textarea,max_length=ListItem.notes_max, help_text="Any additional information?")
-
+    date = forms.DateField(widget=forms.SelectDateWidget)
+    completed = forms.BooleanField(label="Mark as Completed:", required=False)
     class Meta:
         model = ListItem
-        fields = ('title', 'priority', 'notes',) #'priority', 'notes',)
+        fields = ('title', 'priority', 'notes', 'completed', 'date',) #'priority', 'notes',)

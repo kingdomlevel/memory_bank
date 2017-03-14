@@ -5,6 +5,9 @@ from memoryBankApp.models import List, ListItem
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+
+
 
 # Create your views here.
 
@@ -28,9 +31,8 @@ def index(request):
 # 	context_dict = {'allLists': allLists,}
 # 	return render(request, 'memoryBankApp/home.html', context_dict)
 
-
+@login_required
 def home(request):
-
 	newItemform = ListItemForm()
 	if request.method == 'POST' and 'submitAdd' in request.POST:
 		# pass the POST to form through forms.py
@@ -69,17 +71,21 @@ def home(request):
 	context_dict = {'allLists': allLists, 'listCount': listCount, 'form': newItemform, 'editItemForm':editItemForm}
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
+@login_required
 def edit_item(request, id=None):
 	instance = get_object_or_404(ListItem, id=id)
-	editItemForm = EditItemForm(request.POST or None, instance=instance)
-	if editItemForm.is_valid():
-		instance = editItemForm.save(commit = False)
-		instance.save()
-		# return HttpResponse('memoryBankApp/home.html')
-	context = {'form':editItemForm, 'title': instance.title, }
-
-	return render(request,'memoryBankApp/edititem.html', context )
-
+	parentList = instance.list
+	parentUser = parentList.user
+	if (parentUser != request.user):
+		return HttpResponse("You are not authorised to access this content")
+	else:
+		editItemForm = EditItemForm(request.POST or None, instance=instance)
+		if editItemForm.is_valid():
+			instance = editItemForm.save(commit = False)
+			instance.save()
+			# return HttpResponse('memoryBankApp/home.html')
+		context = {'form':editItemForm, 'title': instance.title, }
+		return render(request,'memoryBankApp/edititem.html', context )
 
 def testlist(request):
 	allLists = List.objects.filter(user=request.user)

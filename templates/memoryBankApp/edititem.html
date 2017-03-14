@@ -5,14 +5,13 @@
 {% block body_block %}
 
 
-
-
 <form role="form" id="ListForm" method="post" action=".">
     <h2 class="form-signin-heading">EditItem</h2>
     {% csrf_token %}
     {% for field in form.visible_fields %}
     {{ field.errors }}
     {{ field.help_text }}<br/>
+    {{ field.label }}<br/>
     {{ field }}<br/>
     {% endfor %}
     <br/>
