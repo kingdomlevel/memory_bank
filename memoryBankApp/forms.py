@@ -15,7 +15,6 @@ class ListForm(forms.ModelForm):
 
 class ListItemForm(forms.ModelForm):
     title = forms.CharField(max_length=ListItem.max, help_text="Please give your item a title")
-    #include a javascript datepicker for the date field
     priority_list = [(1,'low'), (2,'medium'), (3,'high')]
     priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?")
     notes = forms.CharField(widget=forms.Textarea, max_length=ListItem.notes_max,
@@ -27,20 +26,20 @@ class ListItemForm(forms.ModelForm):
 
 
 class EditItemForm(forms.ModelForm):
-    title = forms.CharField(max_length=ListItem.max, help_text="Change Title?")
+    title = forms.CharField(max_length=ListItem.max, help_text="Change Title?", label="Title: ")
     priority_list = [(1,'low'), (2,'medium'), (3,'high')]
-    priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?")
+    priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?", label="Priority Level: ")
     notes = forms.CharField(widget=forms.Textarea,max_length=ListItem.notes_max,
-                            help_text="Any additional information?")
-    date = forms.DateField(widget=forms.SelectDateWidget)
+                            help_text="Any additional information?", label="Notes: ", required=False)
+    date = forms.DateField(widget=forms.SelectDateWidget, label="Due date: ")
     completed = forms.BooleanField(label="Mark as Completed:", required=False)
-    removed = forms.BooleanField(label= "Mark for Deletion:", required=False)
+    # removed = forms.BooleanField(label= "Mark for Deletion:", required=False)
     class Meta:
         model = ListItem
-        fields = ('title', 'date', 'priority', 'notes', 'completed','removed',)
+        fields = ('title', 'date', 'priority', 'notes', 'completed',)
 
 
-class Bank(forms.ModelForm):
+class BankForm(forms.ModelForm):
 
 
 
@@ -49,7 +48,7 @@ class Bank(forms.ModelForm):
         fields = ()
 
 
-class BankItem(forms.ModelForm):
+class BankItemForm(forms.ModelForm):
 
 
 
