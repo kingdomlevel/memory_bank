@@ -86,6 +86,8 @@ def edit_item(request, id=None):
 			instance = editItemForm.save(commit = False)
 			instance.removed = remove
 			instance.save()
+			# redirect to home after saving changes or removing item from list
+			return HttpResponseRedirect('/memorybank/home')
 	context = {'form':editItemForm, 'title': instance, }
 	return render(request,'memoryBankApp/edititem.html', context )
 
