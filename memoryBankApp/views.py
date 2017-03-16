@@ -48,6 +48,7 @@ def home(request):
 			# update the List attribute of list item
 			newItem.list_id = id
 			newItem.save()
+			newItemform = ListItemForm()
 			pass
 		else:
 			# print errors to the terminal
@@ -56,7 +57,7 @@ def home(request):
 	editItemForm = EditItemForm()
 
 
-
+	#NOT CURRENTLY USED
 	#instance = ListItem.objects.filter(user=request.user)
 	if request.method == 'POST' and 'submitEdit' in request.POST:
 		editItemForm = EditItemForm(request.POST)
@@ -87,6 +88,7 @@ def edit_item(request, id=None):
 			instance.removed = remove
 			instance.save()
 			# redirect to home after saving changes or removing item from list
+			editItemForm = EditItemForm() #check this
 			return HttpResponseRedirect('/memorybank/home')
 	context = {'form':editItemForm, 'title': instance, }
 	return render(request,'memoryBankApp/edititem.html', context )
