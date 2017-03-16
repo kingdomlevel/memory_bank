@@ -35,6 +35,7 @@ def index(request):
 @login_required
 def home(request):
 	newItemform = ListItemForm()
+	newListForm = ListForm()
 	if request.method == 'POST' and 'submitAdd' in request.POST:
 		# pass the POST to form through forms.py
 		newItemform = ListItemForm(request.POST)
@@ -60,6 +61,22 @@ def home(request):
 		else:
 			# print errors to the terminal
 			print(newItemform.errors)
+	if request.method == 'POST' and 'submitAddList' in request.POST:
+		newListForm = ListForm(request.POST)
+		print("NEW LIST ADDED")
+		if newListForm.is_valid():
+			# save new list
+			newList = newListForm.save(commit=False)
+			# update username to current user
+			newList.user = request.user
+			# post change to database
+			newList.save()
+			# return to user's home page
+			newListForm = ListForm()
+		else:
+			# print errors to the terminal
+			print(newListForm.errors)
+
 
 	editItemForm = EditItemForm()
 
@@ -75,8 +92,13 @@ def home(request):
 	allLists = List.objects.filter(user=request.user)
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
-	context_dict = {'allLists': allLists, 'listCount': listCount, 'form': newItemform,
-					'editItemForm':editItemForm}
+	allListsCol1 = allLists[0::3]
+	allListsCol2 = allLists[1::3]
+	allListsCol3 = allLists[2::3]
+	context_dict = {'allLists': allLists, 'allListsCol1': allListsCol1,
+					'allListsCol2': allListsCol2, 'allListsCol3': allListsCol3,
+					'listCount': listCount, 'form': newItemform,
+					'editItemForm':editItemForm, 'ListForm': newListForm}
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
 @login_required
@@ -188,4 +210,4 @@ def testitemform(request):
 			print(form.errors)
 
 	context_dict = {'form': form}
-	return render(request, 'memoryBankApp/testitemform.html', context_dict)
+	return render(request, 'memoryBankApp/testitem.html', context_dict)

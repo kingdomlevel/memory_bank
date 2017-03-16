@@ -15,6 +15,16 @@
     font-size: 20px;
 }
 
-.listBox {
-    
+.col-lg-4, col-md-4, col-sm-4, col-xs-4{
+    float:left;
 }
+
+.listbox{
+    display:block;
+    border:1px solid #ffffff;
+    border-radius:3px;
+    margin-bottom:20px;
+    background-color:#dadfe3;
+}
+
+
