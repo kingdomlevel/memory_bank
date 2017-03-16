@@ -16,6 +16,9 @@ urlpatterns = [
     url(r'^testform/$', views.testform, name='testform'),
     url(r'^testitemform/$', views.testitemform, name='testitemform'),
     url(r'^(?P<id>\d+)/$', views.edit_item, name='edit_item'),
+    url(r'^home/$', views.home, name='home'),
+    url(r'^bankitems/$', views.bank_display, name= 'bank_display'),
+    url(r'^banktest/$', views.banktest, name= 'banktest'),
     # url(r'about/', views.about, name='about'),
     # url(r'contact/', views.contact, name='contact'),
     # url(r'faq/', views.faq, name='faq'),
@@ -30,7 +33,7 @@ urlpatterns = [
     # url(r'^settings/$', views.settings, name='settings'),
     #
     # # user's personalised pages
-     url(r'^home/$', views.home, name='home'),
+
     # url(r'^new-list/$', views.new_list, name='new_list'),
     # url(r'^create-bank/$', views.create_bank, name='create_bank'),
     # # ?? DO WE ACTUALLY NEED THE BELOW URL??

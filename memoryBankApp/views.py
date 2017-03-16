@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from registration.backends.simple.views import RegistrationView
 from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm
-from memoryBankApp.models import List, ListItem
+from memoryBankApp.models import List, ListItem, BankItem
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 
 
@@ -42,13 +43,19 @@ def home(request):
 			print newItemform.fields
 			# pass the list ID from the POST to a variable
 			id = request.POST.get('listID')
-			print request.POST.get('listID')
 			# save the form to a variable but don't commit to database
 			newItem = newItemform.save(commit=False)
+
 			# update the List attribute of list item
 			newItem.list_id = id
 			newItem.save()
 			newItemform = ListItemForm()
+
+			#Add the title of the list item to the bank (BankItems model)
+			bankTitle = request.POST.get('title')
+			bankItem = BankItem.objects.create(title = bankTitle)
+			bankItem.save()
+			print (bankItem.title)
 			pass
 		else:
 			# print errors to the terminal
@@ -65,11 +72,11 @@ def home(request):
 			editItemForm.save()
 		else:
 			print(editItemForm.errors)
-
 	allLists = List.objects.filter(user=request.user)
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
-	context_dict = {'allLists': allLists, 'listCount': listCount, 'form': newItemform, 'editItemForm':editItemForm}
+	context_dict = {'allLists': allLists, 'listCount': listCount, 'form': newItemform,
+					'editItemForm':editItemForm}
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
 @login_required
@@ -92,6 +99,33 @@ def edit_item(request, id=None):
 			return HttpResponseRedirect('/memorybank/home')
 	context = {'form':editItemForm, 'title': instance, }
 	return render(request,'memoryBankApp/edititem.html', context )
+
+
+def bank_display(request):
+	bank_list = []
+	starts_with = ''
+	if request.method =='GET':
+		starts_with= request.GET['suggestion']
+		bank_list = bankItems(100, starts_with)
+		print(bank_list)
+
+	return render(request, 'memoryBankApp/banklist.html', {'bank_list': bank_list})
+
+def bankItems(max_results=0, starts_with=''):
+	bank_list = []
+	if starts_with:
+		bank_list = BankItem.objects.filter(name__istartswith=starts_with)
+		print(bank_list)
+		print(starts_with)
+	if max_results>0:
+		if len(bank_list)>max_results:
+			bank_list = bank_list[:max_results]
+		return bank_list
+
+def banktest(request):
+	banklist = BankItem.objects.filter()[:100]
+	context = {'banklist': banklist}
+	return render(request,  'memoryBankApp/banktest.html', context)
 
 def testlist(request):
 	allLists = List.objects.filter(user=request.user)

@@ -69,7 +69,7 @@ class Bank(models.Model):
 class BankItem(models.Model):
     max = 128
     title = models.CharField(max_length=max)
-    bank = models.ForeignKey(Bank)
+    bank = models.ForeignKey(Bank, null=True, blank=True)
 
     def __str__(self):
         return self.title
