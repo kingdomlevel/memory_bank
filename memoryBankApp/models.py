@@ -77,6 +77,18 @@ class BankItem(models.Model):
     def __unicode__(self):
         return self.title
 
+class EnhancedList(models.Model):
+    title_max = 128
+    long_text_max = 9999
+    title = models.CharField(max_length=title_max)
+    long_text = models.CharField(max_length=long_text_max, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
+
+    def __unicode__(self):
+        return unicode(self.title)
+
 
 
 

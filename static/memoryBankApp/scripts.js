@@ -1,42 +1,19 @@
-{% extends "memoryBankApp/base.html" %}
-{% block title_block %}
-{% endblock %}
-{% block body_block %}
-
-<div><h3>Bank test</h3>
-<ul>*******</ul>
-</div>
-
-<div>
-    <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Autocomplete - Combobox</title>
-  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <style>
-  .custom-combobox {
-    position: relative;
-    display: inline-block;
-  }
-  .custom-combobox-toggle {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin-left: -1px;
-    padding: 0;
-  }
-  .custom-combobox-input {
-    margin: 0;
-    padding: 5px 10px;
-  }
-  </style>
-  <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>-->
 
 
-  <!--<script>
+
+$(document).ready(function() {
+    $('.listButton').click(function(e) {
+        target = $(e.target);
+        title = target.attr('data-title');
+        id = target.attr('data-id');
+
+        $('#addItemTitle').text('Add item to "' + title+'"');
+        $('#newItemListID').val(id);
+
+    });
+});
+
+
   $( function() {
     $.widget( "custom.combobox", {
       _create: function() {
@@ -173,27 +150,25 @@
       $( "#combobox" ).toggle();
     });
   } );
-  </script>-->
-</head>
-<body>
-
-<div class="ui-widget">
-  <label>Select from the bank: </label>
-  <select id="combobox">
-    <option value="">Select one...</option>
-    {% if banklist %}
-      {% for b in banklist %}
-      <option value="{{ b.title }}">{{ b.title }}</option>
-      {% endfor %}
-      {% endif %}
-      </select>
-</div>
-<button id="toggle">Show underlying select</button>
 
 
-</body>
-</html>
-</div>
 
 
-{% endblock %}
+
+
+// </script>
+
+/*<script type="text/javascript">
+    $(document).ready(function(){
+        $('.editButton').click(function(e) {
+        target = $(e.target);
+        title = target.attr('item-title');
+        notes = target.attr('item-notes');
+
+        $('#editItem').text('make changes to: "' + title + '"');
+        $('#editItemNotes').text(''+ notes);
+
+        });
+    });
+
+</script>*/

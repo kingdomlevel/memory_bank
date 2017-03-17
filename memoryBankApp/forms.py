@@ -1,5 +1,5 @@
 from django import forms
-from memoryBankApp.models import List, ListItem, Bank, BankItem
+from memoryBankApp.models import List, ListItem, Bank, BankItem, EnhancedList
 from datetime import date
 from django.contrib.auth.models import User
 
@@ -55,3 +55,11 @@ class BankItemForm(forms.ModelForm):
     class Meta:
         model = BankItem
         fields = ()
+
+
+class EnhancedListForm(forms.ModelForm):
+    title = forms.CharField(max_length=EnhancedList.title_max, label="Title: ")
+    
+    class Meta:
+        model = EnhancedList
+        fields = ('title',)

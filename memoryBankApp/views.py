@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from registration.backends.simple.views import RegistrationView
-from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm
-from memoryBankApp.models import List, ListItem, BankItem
+from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm, EnhancedListForm
+from memoryBankApp.models import List, ListItem, BankItem, EnhancedList
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
@@ -57,6 +57,7 @@ def home(request):
 			bankItem = BankItem.objects.create(title = bankTitle)
 			bankItem.save()
 			print (bankItem.title)
+			return HttpResponseRedirect('/memorybank/home')
 			pass
 		else:
 			# print errors to the terminal
@@ -73,6 +74,7 @@ def home(request):
 			newList.save()
 			# return to user's home page
 			newListForm = ListForm()
+			return HttpResponseRedirect('/memorybank/home')
 		else:
 			# print errors to the terminal
 			print(newListForm.errors)
@@ -211,3 +213,23 @@ def testitemform(request):
 
 	context_dict = {'form': form}
 	return render(request, 'memoryBankApp/testitem.html', context_dict)
+
+
+def enhancedlist(request):
+	form = EnhancedListForm()
+	if request.method == 'POST':
+		form = EnhancedListForm(request.POST)
+		if form.is_valid():
+			print("POSTED")
+			text = request.POST.get('editor1')
+			new_enhanced = form.save(commit=False)
+			new_enhanced.long_text = text
+			new_enhanced.save()
+			form = EnhancedListForm()
+			return HttpResponseRedirect('/memorybank/home')
+		else:
+			print("NOT POSTED!!!!!")
+			print(form.errors)
+
+	context_dict = {'form': form}
+	return render(request, 'memoryBankApp/enhancedlist.html', context_dict)

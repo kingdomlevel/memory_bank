@@ -1,6 +1,6 @@
 {% extends "memoryBankApp/base.html" %}
 {% block title_block %}
-    Home Title
+    Edit List Item
 {% endblock %}
 {% block body_block %}
 
@@ -22,7 +22,7 @@
 </script>
 
 <div class="container">
-    <form role="form" id="ListForm" method="post" action=".">
+    <form role="form" id="ListForm" method="post" action="">
         <h2 class="form-signin-heading">Edit List Item</h2>
         {% csrf_token %}
         {% for field in form.visible_fields %}
@@ -39,16 +39,5 @@
         <!--<li><a href="{% url 'home' %}">return to your lists</a></li>-->
     </form>
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}
