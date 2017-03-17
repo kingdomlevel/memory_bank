@@ -1,303 +1,319 @@
 {% extends "memoryBankApp/base.html" %}
-{% block title_block %}
-    Home Title
-{% endblock %}
+{% load staticfiles %}
+<head>
+
+   {% block title_block %}
+   Home
+   {% endblock %}
+
+
+
+
+</head>
+
+
 {% block body_block %}
 
-
 <!--<script type="text/javascript">
-    $(document).ready(function() {
-        $('.listButton').click(function(e) {
-            target = $(e.target);
-            title = target.attr('data-title');
-            id = target.attr('data-id');
+$(document).ready(function() {
+$('.listButton').click(function(e) {
+target = $(e.target);
+title = target.attr('data-title');
+id = target.attr('data-id');
 
-            $('#addItemTitle').text('Add item to "' + title+'"');
-            $('#newItemListID').val(id);
+$('#addItemTitle').text('Add item to "' + title+'"');
+$('#newItemListID').val(id);
 
-        });
-    });
+});
+});
 </script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('.editButton').click(function(e) {
-        target = $(e.target);
-        title = target.attr('item-title');
-        notes = target.attr('item-notes');
+$(document).ready(function(){
+$('.editButton').click(function(e) {
+target = $(e.target);
+title = target.attr('item-title');
+notes = target.attr('item-notes');
 
-        $('#editItem').text('make changes to: "' + title + '"');
-        $('#editItemNotes').text(''+ notes);
+$('#editItem').text('make changes to: "' + title + '"');
+$('#editItemNotes').text(''+ notes);
 
-        });
-    });
+});
+});
 
 </script>-->
 
 
-
-
-
 <div class="container">
-     <!-- Trigger the modal with a button -->
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal">Create New List</button>
+   <!-- Trigger the modal with a button -->
+   <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> Create New List</button> -->
 
-        <!-- Modal -->
-        <div class="modal fade" id="AddListModal" role="dialog">
-            <div class="modal-dialog">
-    
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Create new list</h4>
-                    </div>
-                    
-                    <div class="modal-body">
-                    
-                        <form role="ListForm" id="ListForm" method="post" action="">
-                            <h2 class="form-signin-heading">Enter a name for your new list</h2>
-                                {% csrf_token %}
-                            
-                                {% for field in ListForm.visible_fields %}
-                                    {{ field.errors }}
-                                    {{ field.help_text }}<br/>
-                                    {{ field }}<br/>
-                                {% endfor %}
-                            <br/>
-                            <button class="btn btn-primary" type="submit" name="submitAddList">Create List</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                
-                </div>
+   <!-- Modal -->
+   <div class="modal fade" id="AddListModal" role="dialog">
+      <div class="modal-dialog">
+
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title">Create new list</h4>
             </div>
-        </div>
+
+            <div class="modal-body">
+
+               <form role="ListForm" id="ListForm" method="post" action="">
+                  <h2 class="form-signin-heading">Enter a name for your new list</h2>
+                  {% csrf_token %}
+
+                  {% for field in ListForm.visible_fields %}
+                  {{ field.errors }}
+                  {{ field.help_text }}<br/>
+                  {{ field }}<br/>
+                  {% endfor %}
+                  <br/>
+                  <button class="btn btn-primary" type="submit" name="submitAddList"><b>+</b> Create List</button>
+               </form>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+         </div>
+      </div>
+   </div>
 </div>
 
 
 
 <div class="container">
-    <h1>All Lists</h1>
-    <div class="row">
-        {% if allLists %}
-        <ul>
-            {% for List in allListsCol1 %}
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="listbox">
-                    <h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4>
-                    <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-                            data-title="{{ List.title }}" data-id="{{ List.id }}" >Add list item</button>
-                    <ul>
-                        {% for item in List.listitem_set.all  %}
-                        {% if item %}
-                                {% if item.removed %}
-                                <!--Do nothing-->
-                                {% else %}
-                                {% if item.completed %}
-                                <del>
-                                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                                </del>
-                                {% else %}
-                                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                                {% endif %}
-                        {% endif %}
-                        
-                        {% else %}
-                        <li> no items in this! </li>
-                        {% endif %}
-                        {% endfor  %}
-                    </ul>
-                </div>
-            </div>
-            {% endfor %}
-        </ul>
+   <div id="homeLists">
+      <div id=homeListsHeader>
 
+
+         <h1>All {{ user.username }}'s Lists</h1>
+         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> Create New List</button>
+      </div>
+         <div class="row">
+         {% if allLists %}
          <ul>
-            {% for List in allListsCol2 %}
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="listbox">
-                    <h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4>
-                    <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-                            data-title="{{ List.title }}" data-id="{{ List.id }}" >Add list item</button>
-                    <ul>
-                        {% for item in List.listitem_set.all  %}
-                        {% if item %}
-                                {% if item.removed %}
-                                <!--Do nothing-->
-                                {% else %}
-                                {% if item.completed %}
-                                <del>
-                                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                                </del>
-                                {% else %}
-                                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                                {% endif %}
-                        {% endif %}
-                        
-                        {% else %}
-                        <li> no items in this! </li>
-                        {% endif %}
-                        {% endfor  %}
-                    </ul>
-                </div>
+
+            {% for List in allListsCol1 %}
+            <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> -->
+            <div class="col-sm-3">
+               <div class="listbox">
+                  <h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4>
+                  <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
+                  data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add list item</button>
+                  <ul>
+                     {% for item in List.listitem_set.all  %}
+                     {% if item %}
+                     {% if item.removed %}
+                     <!--Do nothing-->
+                     {% else %}
+                     {% if item.completed %}
+                     <del>
+                        <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                     </del>
+                     {% else %}
+                     <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                     {% endif %}
+                     {% endif %}
+
+                     {% else %}
+                     <li> no items in this! </li>
+                     {% endif %}
+                     {% endfor  %}
+                  </ul>
+               </div>
             </div>
             {% endfor %}
-        </ul>
+            {% for List in allListsCol2 %}
+            <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> -->
+            <div class="col-sm-3">
+               <div class="listbox">
+                  <h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4>
+                  <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
+                  data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add list item</button>
+                  <ul>
+                     {% for item in List.listitem_set.all  %}
+                     {% if item %}
+                     {% if item.removed %}
+                     <!--Do nothing-->
+                     {% else %}
+                     {% if item.completed %}
+                     <del>
+                        <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                     </del>
+                     {% else %}
+                     <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                     {% endif %}
+                     {% endif %}
+
+                     {% else %}
+                     <li> no items in this! </li>
+                     {% endif %}
+                     {% endfor  %}
+                  </ul>
+               </div>
+            </div>
+            {% endfor %}
+
+         </ul>
 
 
          <ul>
             {% for List in allListsCol3 %}
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="listbox">
-                    <h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4>
-                    <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-                            data-title="{{ List.title }}" data-id="{{ List.id }}" >Add list item</button>
-                    <ul>
-                        {% for item in List.listitem_set.all  %}
-                        {% if item %}
-                                {% if item.removed %}
-                                <!--Do nothing-->
-                                {% else %}
-                                {% if item.completed %}
-                                <del>
-                                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                                </del>
-                                {% else %}
-                                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                                {% endif %}
-                        {% endif %}
-                        
-                        {% else %}
-                        <li> no items in this! </li>
-                        {% endif %}
-                        {% endfor  %}
-                    </ul>
-                </div>
+            <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> -->
+            <div class="col-sm-3">
+               <div class="listbox">
+                  <h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4>
+                  <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
+                  data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b>  Add list item</button>
+                  <ul>
+                     {% for item in List.listitem_set.all  %}
+                     {% if item %}
+                     {% if item.removed %}
+                     <!--Do nothing-->
+                     {% else %}
+                     {% if item.completed %}
+                     <del>
+                        <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                     </del>
+                     {% else %}
+                     <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                     {% endif %}
+                     {% endif %}
+
+                     {% else %}
+                     <li> no items in this! </li>
+                     {% endif %}
+                     {% endfor  %}
+                  </ul>
+               </div>
             </div>
             {% endfor %}
-        </ul>
+         </ul>
 
-        
-        <!--This is for the quicklist section on the right side of the screen-->
+
+         <!--This is for the quicklist section on the right side of the screen-->
          <ul>
             <!--{% for List in allListsCol4 %}
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                <div class="listbox">
-                    <li><h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4></li>
-                    <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-                            data-title="{{ List.title }}" data-id="{{ List.id }}" >Add list item</button>
-                    <ul>
-                        {% for item in List.listitem_set.all  %}
-                        {% if item %}
-                                {% if item.removed %}-->
-                                <!--Do nothing-->
-                                <!--{% else %}
-                                {% if item.completed %}
-                                <del>
-                                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                                </del>
-                                {% else %}
-                                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                                {% endif %}
-                        {% endif %}
-                        
-                        {% else %}
-                        <li> no items in this! </li>
-                        {% endif %}
-                        {% endfor  %}
-                    </ul>
-                </div>
+            <!-- <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> -->
+            <div class="col-sm-3">
+               <div class="listbox">
+                  <li><h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4></li>
+                  <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
+                  data-title="{{ List.title }}" data-id="{{ List.id }}" >Add list item</button>
+                  <ul>
+                     {% for item in List.listitem_set.all  %}
+                     {% if item %}
+                     {% if item.removed %}-->
+                     <!--Do nothing-->
+                     <!--{% else %}
+                     {% if item.completed %}
+                     <del>
+                     <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                  </del>
+                  {% else %}
+                  <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                  {% endif %}
+                  {% endif %}
+
+                  {% else %}
+                  <li> no items in this! </li>
+                  {% endif %}
+                  {% endfor  %}
+               </ul>
             </div>
-            {% endfor %}-->
-        </ul>
+         </div>
+         {% endfor %}-->
+      </ul>
 
 
-        {% else %}
-        <h3> you don't have any lists yet</h3>
-        {% endif %}
-    </div>
-    
-            <!-- Modal -->
-            <div class="modal fade" id="AddListItemModal" role="dialog">
-                <div class="modal-dialog">
+      {% else %}
+      <h3> you don't have any lists yet</h3>
+      {% endif %}
+   </div>
 
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Add list item</h4>
-                        </div>
+   <!-- Modal -->
+   <div class="modal fade" id="AddListItemModal" role="dialog">
+      <div class="modal-dialog">
 
-                        <div class="modal-body">
-                                    <!--<form>-->
-                                        <!--<li class="nav-header">suggestions from the bank</li>-->
-                                        <!--<input class="search-query form-control" type="text"-->
-                                        <!--name="bankList" value="" id="bankList"/>-->
-                                    <!--</form>-->
-
-
-                            <form role="form" id="ListForm" method="post" action="">
-                                <h2 class="form-signin-heading" id="addItemTitle">Add new item for...</h2>
-                                    {% csrf_token %}
-
-                                    <input type="hidden" id="newItemListID" name="listID" value="" />
-
-                                    {% for field in form.visible_fields %}
-                                        {{ field.errors }}
-                                        {{ field.help_text }}<br/>
-                                        {{ field }}<br/>
-
-                                    {% endfor %}
-                                <br/>
-                                <button class="btn btn-primary" type="submit" name="submitAdd">Add item</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-
-                    </div>
-            </div>
+         <!-- Modal content-->
+         <div class="modal-content">
+            <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">&times;</button>
+               <h4 class="modal-title"><b>+</b> Add list item</h4>
             </div>
 
+            <div class="modal-body">
+               <!--<form>-->
+               <!--<li class="nav-header">suggestions from the bank</li>-->
+               <!--<input class="search-query form-control" type="text"-->
+               <!--name="bankList" value="" id="bankList"/>-->
+               <!--</form>-->
 
 
+               <form role="form" id="ListForm" method="post" action="">
+                  <h2 class="form-signin-heading" id="addItemTitle">Add new item for...</h2>
+                  {% csrf_token %}
 
-    <!--<div class="modal fade" id="EditModal" role="dialog">
-                <div class="modal-dialog">
+                  <input type="hidden" id="newItemListID" name="listID" value="" />
 
-                     Modal content
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title">Edit item</h4>
-                        </div>
+                  {% for field in form.visible_fields %}
+                  {{ field.errors }}
+                  {{ field.help_text }}<br/>
+                  {{ field }}<br/>
 
-                        <div class="modal-body">
-
-                            <form role="form" id="EditItemForm" method="post" action=".">
-                                <h2 class="form-signin-heading" id="editItem">""</h2>
-                                    {% csrf_token %}
-
-                                    {{ editItemForm.title.help_text }}<br/>
-                                    {{ editItemForm.title }}<br/>
-                                    {{ editItemForm.notes.help_text }}<br/>
-                                    {{ editItemForm.notes }}
-
-                                <br/>
-                                <button class="btn btn-primary" type="submit" name="submitEdit">Edit item</button>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-
-                    </div>
+                  {% endfor %}
+                  <br/>
+                  <button class="btn btn-primary" type="submit" name="submitAdd">Add item</button>
+               </form>
             </div>
-    </div>-->
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+         </div>
+      </div>
+   </div>
+
+
+
+
+   <!--<div class="modal fade" id="EditModal" role="dialog">
+   <div class="modal-dialog">
+
+   Modal content
+   <div class="modal-content">
+   <div class="modal-header">
+   <button type="button" class="close" data-dismiss="modal">&times;</button>
+   <h4 class="modal-title">Edit item</h4>
+</div>
+
+<div class="modal-body">
+
+<form role="form" id="EditItemForm" method="post" action=".">
+<h2 class="form-signin-heading" id="editItem">""</h2>
+{% csrf_token %}
+
+{{ editItemForm.title.help_text }}<br/>
+{{ editItemForm.title }}<br/>
+{{ editItemForm.notes.help_text }}<br/>
+{{ editItemForm.notes }}
+
+<br/>
+<button class="btn btn-primary" type="submit" name="submitEdit">Edit item</button>
+</form>
+</div>
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+
+</div>
+</div>
+</div>-->
+</div>
 </div>
 
 {% endblock %}

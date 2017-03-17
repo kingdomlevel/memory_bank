@@ -3,14 +3,38 @@
 {% block body_block %}
 
 <html>
-   <head>
-    	<title>memoryBank</title>
-   </head>
-   <body>
-    	<h1>memoryBank</h1>
-    	<p>
-        Test text here
-    	</p>
-   </body>
+<head>
+   <title>memoryBank</title>
+</head>
+<body id="index">
+   <div class="col-sm-4 col-sm-offset-4">
+      <div id="index-login">
+
+         <h1>memoryBank</h1>
+         <p>
+            Welcome to <b>memoryBank!</b>
+         </p>
+         <p>
+            <b>memoryBank</b> is a to-do list web application that allows users to save tasks to a virtual <i>bank</i> - a directory of commonly repeating tasks that could otherwise go uncompleted.
+         </p>
+         <p>
+            You need an account to continue:
+         </p>
+         <ul>
+
+
+            <li>
+               <a href="{% url 'registration_register' %}" alt="Register for a memoryBank user account"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+            </li>
+
+            <li>
+               <a href="{% url 'auth_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+            </li>
+
+         </ul>
+
+      </div>
+   </div>
+</body>
 </html>
 {% endblock %}
