@@ -18,7 +18,7 @@
 /* Index.html (before login!) */
 #index {
    background-image: url(http://i.imgur.com/RJ18rRV.jpg);
-   background-size: cover;
+   background-size: auto;
 }
 
 #index .col-sm-4 {
@@ -43,11 +43,6 @@
 
 
 /* User's Home Page (home.html) */
-
-body {
-   background-image: url(http://i.imgur.com/RJ18rRV.jpg);
-}
-
 #homeLists {
    background-color: white;
 

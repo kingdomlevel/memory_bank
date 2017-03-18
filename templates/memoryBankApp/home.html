@@ -13,6 +13,9 @@
 
 
 {% block body_block %}
+<body style="background-image: url(http://i.imgur.com/RJ18rRV.jpg)">
+
+
 
 <!--<script type="text/javascript">
 $(document).ready(function() {
@@ -66,9 +69,9 @@ $('#editItemNotes').text(''+ notes);
                   {% csrf_token %}
 
                   {% for field in ListForm.visible_fields %}
-                  {{ field.errors }}
-                  {{ field.help_text }}<br/>
-                  {{ field }}<br/>
+                     {{ field.errors }}
+                     {{ field.help_text }}<br/>
+                     {{ field }}<br/>
                   {% endfor %}
                   <br/>
                   <button class="btn btn-primary" type="submit" name="submitAddList"><b>+</b> Create List</button>
@@ -316,4 +319,5 @@ $('#editItemNotes').text(''+ notes);
 </div>
 </div>
 
+</body>
 {% endblock %}
