@@ -1,6 +1,3 @@
-
-
-
 $(document).ready(function() {
     $('.listButton').click(function(e) {
         target = $(e.target);
