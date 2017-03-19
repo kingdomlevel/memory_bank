@@ -4,4 +4,4 @@ db.sqlite3
 *.DS_Store
 itech-project.pdf
 .idea/
-migrations/
+memoryBankApp/migrations/
