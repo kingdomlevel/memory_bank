@@ -18,6 +18,8 @@ class List(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=max)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    removed = models.BooleanField(default=False)
+
     #slug = models.SlugField(unique=True)
 
   #  def save(self,*args, **kwargs):
@@ -47,6 +49,7 @@ class ListItem(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
     completed = models.BooleanField(default=False)
     removed = models.BooleanField(default = False)
+
 
     def __str__(self):
         return self.title

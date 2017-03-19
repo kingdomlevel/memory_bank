@@ -1,15 +1,68 @@
 
 
-
 $(document).ready(function() {
     $('.listButton').click(function(e) {
         target = $(e.target);
         title = target.attr('data-title');
         id = target.attr('data-id');
-
         $('#addItemTitle').text('Add item to "' + title+'"');
         $('#newItemListID').val(id);
 
+    });
+});
+
+
+$(document).ready(function() {
+    $('.deleteList').click(function(e) {
+        target = $(e.target);
+        title = target.attr('data-title');
+        id = target.attr('data-id');
+        $('#deleteItemTitle').text('Are you sure you want to delete "' + title+'"');
+        $('#DeleteListID').val(id);
+        $('#DeleteListBool').val('1');
+
+    });
+});
+
+
+$('AddListForm').submit(function(){
+    alert(title);
+    target = $(e.target);
+    title = target.attr('data-title');
+});
+
+
+$(document).ready(function(){
+  $('.submitAddList').submit(function(){
+      doc = document.getElementById("AddListForm")
+      target = $(e.target);
+      title = target.attr('data-title');
+      alert(doc.title);
+
+  });
+});
+
+$(document).ready(function() {
+      $('.cancelEdit').click(function() {
+      window.location.href = "/memorybank/home";       
+      });
+  });
+
+
+$(document).ready(function() {
+      $('.cancelDelete').click(function() {
+      window.location.href = "/memorybank/home";       
+      });
+  });
+
+
+$(document).ready(function() {
+    $('.submitDelete').click(function() {
+        if (confirm("Are you sure you want to delete this item?")){
+          $('#removeFormField').val('1');        
+          document.getElementById("ListForm").submit();
+        }
+                    
     });
 });
 

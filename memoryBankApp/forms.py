@@ -59,7 +59,15 @@ class BankItemForm(forms.ModelForm):
 
 class EnhancedListForm(forms.ModelForm):
     title = forms.CharField(max_length=EnhancedList.title_max, label="Title: ")
-    
+
     class Meta:
         model = EnhancedList
         fields = ('title',)
+
+
+class DeleteListForm(forms.ModelForm):
+    title = forms.CharField(max_length=List.max)
+
+    class Meta:
+        model = List
+        fields = ('title', )

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from registration.backends.simple.views import RegistrationView
-from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm, EnhancedListForm
+from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm, EnhancedListForm, DeleteListForm
 from memoryBankApp.models import List, ListItem, BankItem, EnhancedList
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -33,9 +33,23 @@ def index(request):
 # 	return render(request, 'memoryBankApp/home.html', context_dict)
 
 @login_required
-def home(request):
+def delete_list(request):
+	#del_list_form = DeleteListForm()
+	if request.method == 'POST' and 'submitDeleteList' in request.POST:
+		print("WORKS!!!!!!!!!!!!!!!!!!!!!!!!")
+		form = DeleteListForm(request.POST)
+		id = request.POST.get('listID')
+
+	context_dict = {'form': DeleteListForm}
+
+	return render(request, 'memoryBankApp/home.html', context_dict)
+
+
+@login_required
+def home(request, id=None):
 	newItemform = ListItemForm()
 	newListForm = ListForm()
+	del_list_form = DeleteListForm()
 	if request.method == 'POST' and 'submitAdd' in request.POST:
 		# pass the POST to form through forms.py
 		newItemform = ListItemForm(request.POST)
@@ -79,6 +93,13 @@ def home(request):
 			# print errors to the terminal
 			print(newListForm.errors)
 
+	if request.method == 'POST' and 'submitDeleteList' in request.POST:
+		l_id = request.POST.get('listID')
+		remove = request.POST.get('listDeleteBool')
+		update = List.objects.filter(id=l_id).update(removed=remove)
+		return HttpResponseRedirect('/memorybank/home')
+
+
 
 	editItemForm = EditItemForm()
 
@@ -91,7 +112,7 @@ def home(request):
 			editItemForm.save()
 		else:
 			print(editItemForm.errors)
-	allLists = List.objects.filter(user=request.user)
+	allLists = List.objects.filter(user=request.user, removed='0')
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
 	allListsCol1 = allLists[0::3]
@@ -102,6 +123,9 @@ def home(request):
 					'listCount': listCount, 'form': newItemform,
 					'editItemForm':editItemForm, 'ListForm': newListForm}
 	return render(request, 'memoryBankApp/home.html', context_dict)
+
+
+
 
 @login_required
 def edit_item(request, id=None):

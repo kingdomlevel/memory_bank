@@ -1,25 +1,10 @@
 {% extends "memoryBankApp/base.html" %}
+{% load staticfiles %}
 {% block title_block %}
     Edit List Item
 {% endblock %}
 {% block body_block %}
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.submitDelete').click(function() {
-            $('#removeFormField').val('1');
-            document.getElementById("ListForm").submit();
-       });
-    });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.cancelEdit').click(function() {
-        window.location.href = "/memorybank/home";       
-       });
-    });
-</script>
 
 <div class="container">
     <form role="form" id="ListForm" method="post" action="">
@@ -27,7 +12,6 @@
         {% csrf_token %}
         {% for field in form.visible_fields %}
             {{ field.errors }}
-            <!--{{ field.help_text }}<br/>-->
             {{ field.label }}<br/>
             {{ field }}<br/><br/>
         {% endfor %}
@@ -36,7 +20,6 @@
         <button class="btn btn-primary cancelEdit" type="button">Cancel</button>
         <button class="btn btn-primary" type="submit" name="submitSave">Save</button>
         <button type="button" class="btn btn-info btm-sm submitDelete" >Delete Item</button>
-        <!--<li><a href="{% url 'home' %}">return to your lists</a></li>-->
     </form>
 </div>
 
