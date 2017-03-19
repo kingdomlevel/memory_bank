@@ -1,24 +1,7 @@
-.grid-stack {
-   background: green;
-   overflow: hidden;
-}
-
-.grid-stack-item {
-   float: left;
-}
-
-.grid-stack-item-content {
-   background: red;
-   color: #2c3e50;
-   font-family: 'Indie Flower', cursive;
-   text-align: center;
-   font-size: 20px;
-}
-
 /* Index.html (before login!) */
 #index {
    background-image: url(http://i.imgur.com/RJ18rRV.jpg);
-   background-size: cover;
+   background-size: auto;
 }
 
 #index .col-sm-4 {
@@ -43,11 +26,6 @@
 
 
 /* User's Home Page (home.html) */
-
-body {
-   background-image: url(http://i.imgur.com/RJ18rRV.jpg);
-}
-
 #homeLists {
    background-color: white;
 
@@ -88,7 +66,7 @@ never eat shredded wheat */
 .listbox{
    display:block;
    border:1px solid #ffffff;
-   border-radius:3px;
+   border-radius:5px;
    padding: 0 0 0 -20px;
    margin: 10px 20px 10px -20px;
    background-color:#eeeeee;
