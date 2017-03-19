@@ -16,18 +16,14 @@ Home
 {% block body_block %}
 
 
-
-
-
-
 <div class="container">
    <div id="homeLists">
       <div id=homeListsHeader>
 
-
          <h1>All {{ user.username }}'s Lists</h1>
          <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> Create New List</button>
       </div>
+
          <div class="row">
          {% if allLists %}
          <ul>
@@ -44,17 +40,17 @@ Home
                   <ul>
                      {% for item in List.listitem_set.all  %}
                      {% if item %}
-                     {% if item.removed %}
-                     <!--Do nothing-->
-                     {% else %}
-                     {% if item.completed %}
-                     <del>
-                        <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                     </del>
-                     {% else %}
-                     <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                     {% endif %}
-                     {% endif %}
+                        {% if item.removed %}
+                        <!--Do nothing-->
+                        {% else %}
+                              {% if item.completed %}
+                              <del>
+                                    <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                              </del>
+                              {% else %}
+                              <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                              {% endif %}
+                        {% endif %}
 
                      {% else %}
                      <li> no items in this! </li>
@@ -76,17 +72,17 @@ Home
                   <ul>
                      {% for item in List.listitem_set.all  %}
                      {% if item %}
-                     {% if item.removed %}
-                     <!--Do nothing-->
-                     {% else %}
-                     {% if item.completed %}
-                     <del>
-                        <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                     </del>
-                     {% else %}
-                     <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                     {% endif %}
-                     {% endif %}
+                        {% if item.removed %}
+                        <!--Do nothing-->
+                        {% else %}
+                              {% if item.completed %}
+                              <del>
+                                    <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                              </del>
+                              {% else %}
+                              <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                              {% endif %}
+                        {% endif %}
 
                      {% else %}
                      <li> no items in this! </li>
@@ -94,51 +90,8 @@ Home
                      {% endfor  %}
                   </ul>
                </div>
-
-
-{% block body_block %}
-    <div class="container">
-        <!-- Trigger the modal with a button -->
-        <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> Create New List</button> -->
-
-        <!-- Modal -->
-        <div class="modal fade" id="AddListModal" role="dialog">
-            <div class="modal-dialog">
-
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Create new list</h4>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <form role="ListForm" id="ListForm" method="post" action="">
-                            <h2 class="form-signin-heading">Enter a name for your new list</h2>
-                            {% csrf_token %}
-
-                            {% for field in ListForm.visible_fields %}
-                            {{ field.errors }}
-                            {{ field.help_text }}<br/>
-                            {{ field }}<br/>
-                            {% endfor %}
-                            <br/>
-                            <button class="btn btn-primary" type="submit" name="submitAddList"><b>+</b> Create List</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-
-                </div>
-
             </div>
-        </div>
-    </div>
-
-
-
+            {% endfor %}
 
          <ul>
             {% for List in allListsCol3 %}
@@ -153,26 +106,28 @@ Home
                   <ul>
                      {% for item in List.listitem_set.all  %}
                      {% if item %}
-                     {% if item.removed %}
-                     <!--Do nothing-->
+                        {% if item.removed %}
+                        <!--Do nothing-->
+                        {% else %}
+                              {% if item.completed %}
+                              <del>
+                                    <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                              </del>
+                              {% else %}
+                              <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                              {% endif %}
+                        {% endif %}
+
                      {% else %}
-                     {% if item.completed %}
-                     <del>
-                        <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                     </del>
-                     {% else %}
-                     <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                     <li> no items in this! </li>
                      {% endif %}
-                     {% endif %}
-
-    <div class="container">
-        <div id="homeLists">
-
-
-            <div id=homeListsHeader>
-                <h1>All {{ user.username }}'s Lists</h1>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> Create New List</button>
+                     {% endfor  %}
+                  </ul>
+               </div>
             </div>
+            {% endfor %}
+
+   
 
 
 
@@ -216,6 +171,17 @@ Home
       <center><h3> You don't have any lists yet</h3></center>
       {% endif %}
    </div>
+   </div>
+</div>
+
+
+    <div class="container">
+        <div id="homeLists">
+
+            <div id=homeListsHeader>
+                <h1>All {{ user.username }}'s Lists</h1>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> Create New List</button>
+            </div>
 
             <div class="grid-stack" data-gs-animate="yes">
                 {% for list in allLists %}
@@ -254,8 +220,8 @@ Home
                 {% endfor %}
             </div>
 
-
         </div>
+    </div>
 
         <!-- Modal -->
         <div class="modal fade" id="AddListItemModal" role="dialog">
@@ -299,7 +265,7 @@ Home
             </div>
 
 
-            <div class="modal-body">
+            <!--<div class="modal-body">-->
                <!--<form>-->
                <!--<li class="nav-header">suggestions from the bank</li>-->
                <!--<input class="search-query form-control" type="text"-->
@@ -307,7 +273,7 @@ Home
                <!--</form>-->
 
 
-               <form role="form" id="ListForm" method="post" action="">
+               <!--<form role="form" id="ListForm" method="post" action="">
                   <h2 class="form-signin-heading" id="addItemTitle">Add new item for...</h2>
                   {% csrf_token %}
 
@@ -325,11 +291,15 @@ Home
             </div>
             <div class="modal-footer">
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            </div>-->
 
          </div>
       </div>
    </div>
+
+
+
+
 
 
 <div class="container">
@@ -407,13 +377,7 @@ Home
 </div>
 
 
-</div>
-</div>
 
-
-        </div>
-
-    </div>
 
     <script type="text/javascript">
     $(function () {
