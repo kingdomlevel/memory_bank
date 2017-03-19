@@ -1,7 +1,3 @@
-.grid-stack-item {
-    float:right;
-}
-
 /* Index.html (before login!) */
 #index {
    background-image: url(http://i.imgur.com/RJ18rRV.jpg);
@@ -70,7 +66,7 @@ never eat shredded wheat */
 .listbox{
    display:block;
    border:1px solid #ffffff;
-   border-radius:3px;
+   border-radius:5px;
    padding: 0 0 0 -20px;
    margin: 10px 20px 10px -20px;
    background-color:#eeeeee;
