@@ -142,7 +142,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 
 # The page you want users to arrive at after they successfully log in
-LOGIN_REDIRECT_URL = '/memorybank/'
+LOGIN_REDIRECT_URL = '/memorybank/home/'
 
 # The page users are directed to if they are not logged in,
 # and are trying to access pages requiring authentication
