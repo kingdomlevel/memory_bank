@@ -9,7 +9,7 @@
 }
 
 .centre-box .col-sm-4 h1 {
-   border-bottom: thin solid #cccccc;
+   border-bottom: thin solid #ccc;
    margin-top: 0;
    padding-bottom: 10px;
 
@@ -68,14 +68,52 @@ never eat shredded wheat */
    border-radius:5px;
    /*padding: 0 10 0 10px;*/
    margin: 10px 10px 0px 10px;
-   background-color:#eeeeee;
+   background-color:#f8f8f8;
+   border-style: solid;
+   border-color: #aaa;
 }
 
-.btn-info {
+.listbox h4 {
+   padding-bottom: 10px;
+   border-bottom: thin dashed #ccc;
+   margin-bottom: 5px;
+   /*border-style: inset;*/
+}
+
+.listbox h6 {
+   border-style: dotted;
+}
+
+/* New list item button */
+.listbox .btn-info {
+   float: right;
+   padding: 2px 4px;
    margin-left: 10px;
+   margin-right: 10px;
    background-color: #aaaaaa;
    border-style: none;
 }
+
+/* delete list button */
+.listbox .deleteList {
+   float: right;
+   margin-right: 5px;
+}
+
+.listbox ul a {
+   color: #888;
+   /*border-bottom: thin solid #ccc;*/
+   /*text-decoration: underline;*/
+}
+
+.listbox hr {
+   border-color: #bbb;
+   margin-top: 2px;
+   margin-bottom: 2px;
+   margin-right: 20px;
+}
+
+
 
 
 /* list titles on user's home page */

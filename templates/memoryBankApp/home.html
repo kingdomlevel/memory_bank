@@ -13,7 +13,9 @@
 <div class="container">
     <div id="homeLists">
         <div id=homeListsHeader>
-            <h1>All {{ user.username }}'s Lists</h1>
+            <h1>
+               All {{ user.username }}'s Lists
+            </h1>
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> Create New List</button>
         </div>
 
@@ -23,11 +25,21 @@
             <div class="col-sm-3">
                 {% for List in list %}
                 <div class="listbox">
-                    <h4>{{List.title}}<button type="button" class="close deleteList" data-toggle="modal" data-target="#DeleteListModal"
-                        data-title="{{ List.title }}" data-id="{{ List.id }}" >&times;</button></h4>
+                    <h4>
+                       {{List.title}}
+                       <!-- Delete list button -->
+                      <button type="button" class="close deleteList" data-toggle="modal" data-target="#DeleteListModal"
+                       data-title="{{ List.title }}" data-id="{{ List.id }}" >&times;</button>
 
-                    <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-                        data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add list item</button>
+                       <!-- Add list item button -->
+                       <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
+                           data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add item</button>
+
+
+                     </h4>
+
+                    <!-- <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
+                        data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add item</button> -->
                     <ul>
                         {% for item in List.listitem_set.all  %}
                         {% if item %}
@@ -40,6 +52,7 @@
                         </del>
                         {% else %}
                         <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                        <hr />
                         {% endif %}
                         {% endif %}
 
