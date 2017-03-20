@@ -1,3 +1,9 @@
+/* navbar header styles */
+#navbar {
+   box-shadow: 0 0 17px #333;
+}
+
+
 /* Pages w/ centre boxes (e.g. index, log-in, register, etc) */
 
 .centre-box .col-sm-4 {
@@ -5,7 +11,14 @@
    margin-top: 50px;
    padding-top: 10px;
    padding-bottom: 10px;
+
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+
+   border-radius: 20px;
    border-style: solid;
+   border-width: thin;
+   border-color: #cccccc;
 }
 
 .centre-box .col-sm-4 h1 {
@@ -24,10 +37,55 @@
 
 
 
+/* Styles for edit list item page */
+#editListItem .col-sm-6,
+#editListItem .col-sm-offset-6 {
+   background-color: white;
+   margin-top: 30px;
+   margin-bottom: 50px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+
+   border-radius: 20px;
+   border-style: solid;
+   border-width: thin;
+   border-color: #cccccc;
+}
+
+#editListItem h2 {
+   border-bottom: thin solid #ccc;
+   margin-top: 0;
+   padding-bottom: 10px;
+
+   color: #090909;
+   font-size: 1.6em;
+   text-align: center;
+}
+
+#editListItem .table .fieldLabel {
+   text-align: right;
+}
+
+#editListItem .table .field {
+
+}
+
+
+
+
+
 /* User's Home Page (home.html) */
 #homeLists {
-   background-color: white;
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+   margin-top: 40px;
+   margin-bottom: 50px;
+   padding-bottom: 20px;
 
+   border-radius: 20px;
    border-style: solid;
    border-width: thin;
    border-color: #cccccc;
@@ -48,6 +106,7 @@
 
 }
 
+/* create new list button */
 #homeListsHeader .btn-group-lg>.btn, .btn-lg {
    float: right;
    margin: -50px 30px 0 0;
@@ -94,6 +153,10 @@ never eat shredded wheat */
    border-style: none;
 }
 
+.listbox .btn-info:hover {
+   background-color: lightblue;
+}
+
 /* delete list button */
 .listbox .deleteList {
    float: right;
@@ -101,9 +164,13 @@ never eat shredded wheat */
 }
 
 .listbox ul a {
-   color: #888;
+   color: #666;
    /*border-bottom: thin solid #ccc;*/
    /*text-decoration: underline;*/
+}
+
+.listbox ul a:hover {
+   color: lightblue;
 }
 
 .listbox hr {
