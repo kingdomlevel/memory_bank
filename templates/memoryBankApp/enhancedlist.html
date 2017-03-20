@@ -1,43 +1,49 @@
 {% extends "memoryBankApp/base.html" %}
 {% block title_block %}
-    Enhanced List
+Enhanced List
 {% endblock %}
 {% block body_block %}
 
 <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 
 <!--<script>
-        $(document).ready(function() {
-        $('.submitEnhanced').click(function(e) {
-            target = $(e.target);
-            text = target.attr('editor1');
-            alert(text);
-            id = target.attr('data-id');
+$(document).ready(function() {
+$('.submitEnhanced').click(function(e) {
+target = $(e.target);
+text = target.attr('editor1');
+alert(text);
+id = target.attr('data-id');
 
-            $('#addItemTitle').text('Add item to "' + title+'"');
-            $('#newItemListID').val(id);
+$('#addItemTitle').text('Add item to "' + title+'"');
+$('#newItemListID').val(id);
 
-            });
-        });
+});
+});
 </script>-->
 
 <div class="container">
-    <form role="form" id="EnhancedListForm" method="post" >
-        <h2 class="form-signin-heading">Create Enhanced List</h2>
-        {% csrf_token %}
-        {% for field in form.visible_fields %}
-            {{ field.errors }}
-            {{ field.label }}<br/>
-            {{ field }}<br/><br/>
-        {% endfor %}
-        
-        <textarea name="editor1"></textarea>
-        <script>
-            CKEDITOR.replace( 'editor1' );
-        </script>
-        <button class="btn btn-primary submitEnhanced" type="submit" name="submitEnhanced">Save</button>
-        
-    </form>
+   <div class="centre-box">
+      <div class = "centre-extraWide">
+         <div class="col-sm-8 col-sm-offset-2">
+            <form role="form" id="EnhancedListForm" method="post" >
+               <h2 class="form-signin-heading">Create Enhanced List</h2>
+               {% csrf_token %}
+               {% for field in form.visible_fields %}
+               {{ field.errors }}
+               {{ field.label }}<br/>
+               {{ field }}<br/><br/>
+               {% endfor %}
+
+               <textarea name="editor1"></textarea>
+               <script>
+               CKEDITOR.replace( 'editor1' );
+               </script>
+               <br />
+               <button class="btn btn-primary submitEnhanced" type="submit" name="submitEnhanced">Save</button>
+            </form>
+         </div>
+      </div>
+   </div>
 </div>
 
 {% endblock %}

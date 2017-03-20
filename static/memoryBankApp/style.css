@@ -38,8 +38,8 @@
 
 
 /* Styles for edit list item page */
-#editListItem .col-sm-6,
-#editListItem .col-sm-offset-6 {
+.centre-wide .col-sm-6,
+.centre-wide .col-sm-offset-2 {
    background-color: white;
    margin-top: 30px;
    margin-bottom: 50px;
@@ -55,7 +55,7 @@
    border-color: #cccccc;
 }
 
-#editListItem h2 {
+.centre-wide h2 {
    border-bottom: thin solid #ccc;
    margin-top: 0;
    padding-bottom: 10px;
@@ -65,13 +65,41 @@
    text-align: center;
 }
 
-#editListItem .table .fieldLabel {
+.centre-wide .table .fieldLabel {
    text-align: right;
 }
 
-#editListItem .table .field {
 
+
+/* Styles for enhanced list page */
+.centre-extraWide .col-sm-8,
+.centre-extraWide .col-sm-offset-2 {
+   background-color: white;
+   margin-top: 30px;
+   margin-bottom: 50px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+
+   border-radius: 20px;
+   border-style: solid;
+   border-width: thin;
+   border-color: #cccccc;
 }
+
+.centre-extraWide h2 {
+   border-bottom: thin solid #ccc;
+   margin-top: 0;
+   padding-bottom: 10px;
+
+   color: #090909;
+   font-size: 1.6em;
+   text-align: center;
+}
+
+
 
 
 
