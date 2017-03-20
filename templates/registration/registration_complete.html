@@ -1,5 +1,24 @@
 {% extends "memoryBankApp/base.html" %}
+{% block title_block %}
+   Registration complete!
+{% endblock %}
+
 {% block body_block %}
-<h1>Registration Complete</h1>
-<p>You are now registered</p>
+<div class = "centre-box">
+   <div class="col-sm-4 col-sm-offset-4">
+      <h1>Registration Complete</h1>
+      <p>You are now registered!</p>
+      <p>
+         Logged in as <b>{{ user.username }}</b>.
+      </p>
+      <p>
+         Go to:
+         <ul>
+            <li><a href="{% url 'home' %}">Your lists</a></li>
+            <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+         </ul>
+      </p>
+
+   </div>
+</div>
 {% endblock %}

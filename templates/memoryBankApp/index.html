@@ -6,11 +6,27 @@
 <head>
    <title>memoryBank</title>
 </head>
-<body id="index">
+<body class="centre-box">
    <div class="col-sm-4 col-sm-offset-4">
       <div id="index-login">
 
          <h1>memoryBank</h1>
+
+         {% if user.is_authenticated %}
+            <p>
+               Success!
+            </p>
+            <p>
+               Logged in as {{ user.username }}
+            </p>
+            <p>
+               Go to:
+               <ul>
+                  <li><a href="{% url 'home' %}">Your lists</a></li>
+                  <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+               </ul>
+            </p>
+         {% else %}
          <p>
             Welcome to <b>memoryBank!</b>
          </p>
@@ -21,17 +37,14 @@
             You need an account to continue:
          </p>
          <ul>
-
-
             <li>
                <a href="{% url 'registration_register' %}" alt="Register for a memoryBank user account"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
             </li>
-
             <li>
                <a href="{% url 'auth_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
             </li>
-
          </ul>
+         {% endif %}
 
       </div>
    </div>
