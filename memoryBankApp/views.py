@@ -115,14 +115,17 @@ def home(request, id=None):
 	allLists = List.objects.filter(user=request.user, removed='0')
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
-	allListsCol1 = allLists[0::3]
-	allListsCol2 = allLists[1::3]
-	allListsCol3 = allLists[2::3]
-	context_dict = {'allLists': allLists, 'allListsCol1': allListsCol1,
-					'allListsCol2': allListsCol2, 'allListsCol3': allListsCol3,
+
+	allListsCol = []
+	cols = 3
+	for i in range(cols):
+		allListsCol.append(allLists[i::cols])
+
+	context_dict = {'allLists': allLists, 'allListsCol': allListsCol,
 					'listCount': listCount, 'form': newItemform,
 					'editItemForm':editItemForm, 'ListForm': newListForm}
 	return render(request, 'memoryBankApp/home.html', context_dict)
+
 
 
 

@@ -67,8 +67,8 @@ never eat shredded wheat */
    display:block;
    border:1px solid #ffffff;
    border-radius:5px;
-   padding: 0 0 0 -20px;
-   margin: 10px 20px 10px -20px;
+   /*padding: 0 10 0 10px;*/
+   margin: 10px 10px 0px 10px;
    background-color:#eeeeee;
 }
 
@@ -81,7 +81,8 @@ never eat shredded wheat */
 
 /* list titles on user's home page */
 .listbox h4 {
-
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 
