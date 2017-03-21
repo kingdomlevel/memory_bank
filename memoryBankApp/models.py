@@ -2,32 +2,16 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-from django.template.defaultfilters import slugify
-
 from django.contrib.auth.models import User
 
-# Create your models here.
 
 class List(models.Model):
     max = 128
-    #id = models.IntegerField(primary_key=True)
-
-    #may need to add 'unique=True' to the title parameters if
-    #we have issues
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     title = models.CharField(max_length=max)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     removed = models.BooleanField(default=False)
-
-    #slug = models.SlugField(unique=True)
-
-  #  def save(self,*args, **kwargs):
-     #   self.slug = slugify(self.title)
-    #    super(List,self).save(*args, **kwargs)
-
-    #class Meta:
-     #   verbose_name_plural = 'lists'
 
     def __str__(self):
         return self.title
@@ -42,7 +26,6 @@ class ListItem(models.Model):
     title = models.CharField(max_length=max)
     date = models.DateField(null=True, blank=True)
     priority = models.CharField(max_length=30, null=True, blank=True)
-    status = models.CharField(max_length=30, null=True, blank=True)
     notes_max = 999
     notes = models.CharField(max_length=notes_max, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -85,6 +68,7 @@ class EnhancedList(models.Model):
     long_text_max = 9999
     title = models.CharField(max_length=title_max)
     long_text = models.CharField(max_length=long_text_max, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title

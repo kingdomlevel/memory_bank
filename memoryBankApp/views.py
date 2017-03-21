@@ -10,39 +10,22 @@ from django.http import JsonResponse
 
 
 
-# Create your views here.
-
-
 def index(request):
-	# request.session.set_test_cookie()
-
-	# category_list = Category.objects.order_by('-likes')[:5]
-	# page_list = Page.objects.order_by('-views')[:5]
-	# context_dict = {'categories': category_list, 'pages': page_list}
-
-	# visitor_cookie_handler(request)
-	# context_dict['visits'] = request.session['visits']
 
 	response = render(request, 'memoryBankApp/index.html')
 	return response
 
-# def home(request):
-# 	allLists = List.objects.all()
-# 	allLists = List.objects.filter(List.user)
-# 	context_dict = {'allLists': allLists,}
+
+# @login_required
+# def delete_list(request):
+# 	#del_list_form = DeleteListForm()
+# 	if request.method == 'POST' and 'submitDeleteList' in request.POST:
+# 		form = DeleteListForm(request.POST)
+# 		id = request.POST.get('listID')
+#
+# 	context_dict = {'form': DeleteListForm}
+#
 # 	return render(request, 'memoryBankApp/home.html', context_dict)
-
-@login_required
-def delete_list(request):
-	#del_list_form = DeleteListForm()
-	if request.method == 'POST' and 'submitDeleteList' in request.POST:
-		print("WORKS!!!!!!!!!!!!!!!!!!!!!!!!")
-		form = DeleteListForm(request.POST)
-		id = request.POST.get('listID')
-
-	context_dict = {'form': DeleteListForm}
-
-	return render(request, 'memoryBankApp/home.html', context_dict)
 
 
 @login_required
@@ -100,22 +83,10 @@ def home(request, id=None):
 	if request.method == 'POST' and 'submitDeleteList' in request.POST:
 		l_id = request.POST.get('listID')
 		remove = request.POST.get('listDeleteBool')
-		update = List.objects.filter(id=l_id).update(removed=remove)
+		List.objects.filter(id=l_id).update(removed=remove)
 		return HttpResponseRedirect('/memorybank/home')
 
 
-
-	editItemForm = EditItemForm()
-
-
-	#NOT CURRENTLY USED
-	#instance = ListItem.objects.filter(user=request.user)
-	if request.method == 'POST' and 'submitEdit' in request.POST:
-		editItemForm = EditItemForm(request.POST)
-		if editItemForm.is_valid():
-			editItemForm.save()
-		else:
-			print(editItemForm.errors)
 	banklist = BankItem.objects.filter()[:100]
 	allLists = List.objects.filter(user=request.user, removed='0')
 	allLists = allLists.order_by('-modified_date')
@@ -128,7 +99,8 @@ def home(request, id=None):
 
 	context_dict = {'allLists': allLists, 'allListsCol': allListsCol,
 					'listCount': listCount, 'form': newItemform,
-					'editItemForm':editItemForm, 'ListForm': newListForm, 'banklist': banklist}
+					'ListForm': newListForm, 'banklist': banklist}
+
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
 
@@ -155,6 +127,28 @@ def edit_item(request, id=None):
 			return HttpResponseRedirect('/memorybank/home')
 	context = {'form':editItemForm, 'title': instance, }
 	return render(request,'memoryBankApp/edititem.html', context )
+
+
+@login_required
+def edit_enhanced_list(request, id=None):
+	instance = get_object_or_404(EnhancedList, id=id)
+	user = instance.user_id
+	# print('instance user:')
+	# print(instance.user_id)
+	# print('user:')
+	# print(user)
+	# print(request.user.id)
+	if (user != request.user.id):
+		return HttpResponse("You are not authorised to access this content")
+	else:
+		enhanced_list_form = EnhancedListForm(request.POST or None, instance=instance)
+		if enhanced_list_form.is_valid():
+
+			instance.save()
+			return HttpResponseRedirect('/memorybank/home')
+	context={'form': enhanced_list_form,}
+
+	return render(request,'memoryBankApp/editenhancedlist.html', context )
 
 
 def bank_display(request):
@@ -254,8 +248,10 @@ def enhancedlist(request):
 		if form.is_valid():
 			print("POSTED")
 			text = request.POST.get('editor1')
+			user = request.user
 			new_enhanced = form.save(commit=False)
 			new_enhanced.long_text = text
+			new_enhanced.user = user
 			new_enhanced.save()
 			form = EnhancedListForm()
 			return HttpResponseRedirect('/memorybank/home')
