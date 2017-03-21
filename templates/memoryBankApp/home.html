@@ -22,7 +22,7 @@
         <div class="row">
             {% if allLists %}
             {% for list in allListsCol %}
-            <div class="col-sm-3">
+            <div class="col-sm-4">
                 {% for List in list %}
                 <div class="listbox">
                     <h4>
@@ -52,8 +52,8 @@
                         </del>
                         {% else %}
                         <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                        <hr />
                         {% endif %}
+                        <hr />
                         {% endif %}
 
                         {% else %}
@@ -101,7 +101,7 @@
 </div> <!-- End of container -->
 
 
-<div class="container">
+<div class="container ">
     <!-- Modal -->
     <div class="modal fade" id="AddListItemModal" role="dialog">
         <div class="modal-dialog">
