@@ -3,12 +3,20 @@
    box-shadow: 0 0 17px #333;
 }
 
+#navbar a h3{
+   margin-top: 10px;
+   margin-bottom: 0;
+}
+
+.navbar-header a h3 {
+   margin-left: 60px;
+}
 
 /* Pages w/ centre boxes (e.g. index, log-in, register, etc) */
-
 .centre-box .col-sm-4 {
    background-color: white;
    margin-top: 50px;
+   margin-bottom: 50px;
    padding-top: 10px;
    padding-bottom: 10px;
 
@@ -26,6 +34,7 @@
    margin-top: 0;
    padding-bottom: 10px;
 
+
    color: #090909;
    font-size: 1.6em;
    text-align: center;
@@ -34,7 +43,6 @@
 .centre-box ul {
    list-style-type: none;
 }
-
 
 
 /* Styles for edit list item page */
@@ -75,7 +83,7 @@
 .centre-extraWide .col-sm-8,
 .centre-extraWide .col-sm-offset-2 {
    background-color: white;
-   margin-top: 40px;
+   margin-top: 30px;
    margin-bottom: 50px;
    padding-top: 10px;
    padding-bottom: 10px;
@@ -127,11 +135,17 @@
    border-bottom: thin solid #cccccc;
 }
 
- h1 {
+h1 {
    color: #090909;
    font-size: 1.6em;
    text-align: center;
 
+}
+@media screen and (max-width: 767px){
+   h1{
+      margin-left: 20px;
+      text-align: left;
+   }
 }
 
 /* create new list button */
@@ -213,8 +227,8 @@ never eat shredded wheat */
 
 /* list titles on user's home page */
 .listbox h4 {
-    margin-left: 10px;
-    margin-right: 10px;
+   margin-left: 10px;
+   margin-right: 10px;
 }
 
 

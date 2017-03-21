@@ -115,16 +115,30 @@
                 </div>
 
                 <div class="modal-body">
-                    <!--<form>-->
-                    <!--<li class="nav-header">suggestions from the bank</li>-->
-                    <!--<input class="search-query form-control" type="text"-->
-                    <!--name="bankList" value="" id="bankList"/>-->
-                    <!--</form>-->
-
-
                     <form role="form" id="ListForm" method="post" action="">
                         <h2 class="form-signin-heading" id="addItemTitle">Add new item for...</h2>
                         {% csrf_token %}
+
+                        <div class="ui-widget">
+                         <label>Need an idea from the Bank?: </label>
+                         <select id="combobox" name="bank" onChange="OnDropDownChange(this);">
+                         <option value="">Choose from the bank</option>
+                          {% if banklist %}
+                             {% for b in banklist %}
+                             <option value="{{ b.title }}">{{ b.title }}</option>
+                             {% endfor %}
+                              {% endif %}
+                                 </select>
+                                 </div>
+
+                        <script type="text/javascript">
+                     function OnDropDownChange(dropDown) {
+                    var selectedValue = dropDown.options[dropDown.selectedIndex].value;
+                    document.getElementById("banktitle").value = selectedValue;}
+                        </script>
+
+
+                        <input id="banktitle" name="banktitle" value=""/>
 
                         <input type="hidden" id="newItemListID" name="listID" value="" />
 

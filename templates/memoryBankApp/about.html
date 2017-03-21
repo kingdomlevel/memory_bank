@@ -1,10 +1,68 @@
 {% extends "memoryBankApp/base.html" %}
 {% block title_block %}
+About
 {% endblock %}
 {% block body_block %}
 
-<div><h1>memory bank is quite shite, should have done a pub quiz finder</h1>
-<ul>*******</ul>
+<div class = "centre-box">
+   <div class="col-sm-4 col-sm-offset-4">
+      <h1>About</h1>
+      <p>
+         The startup <a href="http://blog.idonethis.com/how-to-master-the-art-of-to-do-lists/" alt="source">iDoneThis</a>
+         once found that 41% of to-do list items are never completed. Wouldn't
+         it be great if there was a to-do list application that helped you to
+         remember the items on your lists, so that you actually made some headway
+         with <i>getting things done</i>?
+      </p>
+      <p>
+         Enter <b>memoryBank</b>–a to-do list application that actually works.
+      </p>
+      <p>
+         <b>memoryBank</b> has been design with simplicity in mind, so that you
+         can focus on <i>doing</i> instead of just making lists. You can have
+         as many lists as you need, with as many items as you want.
+      </p>
+      <p>
+         All items on your lists have due dates, to help you prioritise your
+         workload. Regularly recurring items can be saved to a virtual <i>bank</i>,
+         to help you remember to include them in future iterations.
+      </p>
+      <p>
+         You can create simple, text-only lists, or include more complex media
+         with our new <b>enhanced list</b> feature.
+      </p>
+      <p></p>
+      <p>
+         <b>memoryBank</b> is a student project by
+            <a href="http://i.dailymail.co.uk/i/pix/2015/11/16/16/2E7F87A500000578-3320659-image-a-132_1447690855426.jpg" target="_blank" alt="team photo">Stewart Brown</a>,
+            <a href="http://www.101greatgoals.com/wp-content/uploads/2014/04/ians-best-bits-moustache-slide-1-590x350.jpg" target="_blank" alt="team photo">Niall Morris</a>,
+            <a href="http://3.bp.blogspot.com/_snL9IUPzWgI/Sxg9qpC7wII/AAAAAAAAuSc/C8XgEZHTSk8/s1600/ross%20kemp2.jpg" target="_blank" alt="team photo">Khari Outram</a>, and
+            <a href="http://i.dailymail.co.uk/i/pix/2016/04/22/15/3366E01C00000578-0-_Get_off_your_f_nut_Danny_Dyer_delivered_a_very_crass_message_to-a-41_1461334449233.jpg" target="_blank" alt="team photo">Calum Thain</a>.
+      </p>
+      <p>
+         <ul>
+         {% if user.is_authenticated %}
+            Go to:
+               <li>
+                  <a href="{% url 'home' %}">Your lists</a>
+               </li>
+               <li><a href="{% url 'contact' %}">Contact us</a></li>
+
+         {% else %}
+            You need an account to use <b>memoryBank</b>:
+
+               <li>
+                  <a href="{% url 'registration_register' %}" alt="Register for a memoryBank user account"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+               </li>
+               <li>
+                  <a href="{% url 'auth_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+               </li>
+               <li>&nbsp; &nbsp; <a href="{% url 'contact' %}">Contact us</a></li>
+         {% endif %}
+      </ul>
+      </p>
+
+   </div>
 </div>
 
 
