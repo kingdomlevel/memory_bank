@@ -62,10 +62,11 @@ class BankItemForm(forms.ModelForm):
 class EnhancedListForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
                             max_length=EnhancedList.title_max, label="Title: ")
+    #long_text = forms.CharField(widget=forms.HiddenInput())
 
     class Meta:
         model = EnhancedList
-        fields = ('title',)
+        fields = ('title', 'long_text',)
 
 
 class DeleteListForm(forms.ModelForm):
@@ -73,4 +74,4 @@ class DeleteListForm(forms.ModelForm):
 
     class Meta:
         model = List
-        fields = ('title', )
+        fields = ('title',)

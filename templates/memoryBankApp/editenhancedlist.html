@@ -1,0 +1,50 @@
+{% extends "memoryBankApp/base.html" %}
+{% block title_block %}
+Edit Enhanced List
+{% endblock %}
+{% block body_block %}
+
+<!--<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>-->
+
+
+<!--<script>
+    $(document).ready(function() {
+        text = $('#id_long_text');
+        $('#editor1').val(text.val());
+        $('#hiddentext').hide();
+    });
+</script>-->
+
+
+<div class="container">
+   <div class="centre-box">
+      <div class = "centre-extraWide">
+         <div class="col-sm-8 col-sm-offset-2">
+            <form role="form" id="EnhancedListForm" method="post" >
+               <h2 class="form-signin-heading">Create Enhanced List</h2>
+               {% csrf_token %}
+               <!--{% for field in form.visible_fields %}
+                    {{ field.errors }}
+                    {{ field.label }}<br/>
+                    {{ field }}<br/><br/>
+               {% endfor %}-->
+               {{ form.title.label }}
+               {{ form.title }}<br/><br/>
+               
+               <div id="hiddentext">
+                    {{ form.long_text }}
+               </div>               
+
+               <textarea id="editor1" name="editor1"></textarea>
+               <script>
+               CKEDITOR.replace( 'editor1' );
+               </script>
+               <br />
+               <button class="btn btn-primary submitEnhanced" type="submit" name="submitEnhanced">Save</button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+{% endblock %}

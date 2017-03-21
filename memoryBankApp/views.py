@@ -129,6 +129,28 @@ def edit_item(request, id=None):
 	return render(request,'memoryBankApp/edititem.html', context )
 
 
+@login_required
+def edit_enhanced_list(request, id=None):
+	instance = get_object_or_404(EnhancedList, id=id)
+	user = instance.user_id
+	# print('instance user:')
+	# print(instance.user_id)
+	# print('user:')
+	# print(user)
+	# print(request.user.id)
+	if (user != request.user.id):
+		return HttpResponse("You are not authorised to access this content")
+	else:
+		enhanced_list_form = EnhancedListForm(request.POST or None, instance=instance)
+		if enhanced_list_form.is_valid():
+
+			instance.save()
+			return HttpResponseRedirect('/memorybank/home')
+	context={'form': enhanced_list_form,}
+
+	return render(request,'memoryBankApp/editenhancedlist.html', context )
+
+
 def bank_display(request):
 	bank_list = []
 	starts_with = ''
@@ -226,8 +248,10 @@ def enhancedlist(request):
 		if form.is_valid():
 			print("POSTED")
 			text = request.POST.get('editor1')
+			user = request.user
 			new_enhanced = form.save(commit=False)
 			new_enhanced.long_text = text
+			new_enhanced.user = user
 			new_enhanced.save()
 			form = EnhancedListForm()
 			return HttpResponseRedirect('/memorybank/home')

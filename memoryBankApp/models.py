@@ -68,6 +68,7 @@ class EnhancedList(models.Model):
     long_text_max = 9999
     title = models.CharField(max_length=title_max)
     long_text = models.CharField(max_length=long_text_max, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title

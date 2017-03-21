@@ -12,6 +12,14 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
+    text = $('#id_long_text');
+    $('#editor1').val(text.val());
+    $('#hiddentext').hide();
+});
+
+
+
+$(document).ready(function() { 
     $('.deleteList').click(function(e) {
         target = $(e.target);
         title = target.attr('data-title');

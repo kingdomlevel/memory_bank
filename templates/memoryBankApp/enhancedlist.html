@@ -15,9 +15,9 @@ Enhanced List
                <h2 class="form-signin-heading">Create Enhanced List</h2>
                {% csrf_token %}
                {% for field in form.visible_fields %}
-               {{ field.errors }}
-               {{ field.label }}<br/>
-               {{ field }}<br/><br/>
+                {{ field.errors }}
+                {{ field.label }}<br/>
+                {{ field }}<br/><br/>
                {% endfor %}
 
                <textarea name="editor1"></textarea>
