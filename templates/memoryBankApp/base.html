@@ -74,6 +74,7 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                <ul class="nav navbar-nav navbar-right">
                {% if user.is_authenticated %}
+                  <li><a href="{% url 'about' %}">About</a></li>
                   <li style="padding-top: 15px; padding-bottom: 15px;">Logged in as <b>{{ user.username }}</b></li>
                   <li><a href="{% url 'auth_logout' %}">Logout</a></li>
                {% else %}
