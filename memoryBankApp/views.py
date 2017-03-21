@@ -92,6 +92,13 @@ def home(request, id=None):
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
 
+	allEnhanced = EnhancedList.objects.filter(user=request.user)
+	allEnhanced = allEnhanced.order_by('title')
+	for a in allEnhanced:
+		print(a.title)
+	enhancedCount = len(allEnhanced)
+
+
 	allListsCol = []
 	cols = 3
 	for i in range(cols):
@@ -99,7 +106,8 @@ def home(request, id=None):
 
 	context_dict = {'allLists': allLists, 'allListsCol': allListsCol,
 					'listCount': listCount, 'form': newItemform,
-					'ListForm': newListForm, 'banklist': bankTitleList}
+					'ListForm': newListForm, 'banklist': bankTitleList,
+					'allEnhanced': allEnhanced, 'enhancedCount': allEnhanced}
 
 	return render(request, 'memoryBankApp/home.html', context_dict)
 

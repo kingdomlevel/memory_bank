@@ -174,6 +174,12 @@ never eat shredded wheat */
    border-color: #aaa;
 }
 
+.listbox h4 a {
+   padding-bottom: 10px;
+   border-bottom: thin dashed #ccc;
+   margin-bottom: 5px;
+}
+
 .listbox h4 {
    padding-bottom: 10px;
    border-bottom: thin dashed #ccc;
@@ -222,7 +228,22 @@ never eat shredded wheat */
    margin-right: 20px;
 }
 
+#enhancedBottom {
+   margin-top: -60px;
+   padding-right: 800px;
+}
 
+#enhancedBottom h1 {
+   border-bottom: thin solid #cccccc;
+   margin-bottom: 10px;
+}
+
+#enhancedBottom ul {
+   margin-top:5px;
+   margin-left: 58px;
+   font-size: 1.2em;
+   list-style-type: none;
+}
 
 
 /* list titles on user's home page */
@@ -230,6 +251,8 @@ never eat shredded wheat */
    margin-left: 10px;
    margin-right: 10px;
 }
+
+
 
 
 
