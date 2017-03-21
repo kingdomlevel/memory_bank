@@ -118,7 +118,7 @@
                         <h2 class="form-signin-heading" id="addItemTitle">Add new item for...</h2>
                         {% csrf_token %}
 
-                        <div class="ui-widget">
+                        <div class="ui-widget" id="banker">
                          <label>Need an idea from the Bank?: </label>
                          <select id="combobox" name="bank" onChange="OnDropDownChange(this);">
                          <option value="">Choose from the bank</option>
@@ -129,15 +129,9 @@
                               {% endif %}
                                  </select>
                                  </div>
+                         <label>or add a new title:</label><br>
 
-                        <script type="text/javascript">
-                     function OnDropDownChange(dropDown) {
-                    var selectedValue = dropDown.options[dropDown.selectedIndex].value;
-                    document.getElementById("banktitle").value = selectedValue;}
-                        </script>
-
-
-                        <input id="banktitle" name="banktitle" value=""/>
+                        <input id="banktitle" name="banktitle" value=""/><br>
 
                         <input type="hidden" id="newItemListID" name="listID" value="" />
 

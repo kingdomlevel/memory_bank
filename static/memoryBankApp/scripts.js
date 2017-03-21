@@ -65,6 +65,48 @@ $(document).ready(function() {
     });
 });
 
+//takes a value from the bank select tag and moves it to title input.
+function OnDropDownChange(dropDown) {
+    var selectedValue = dropDown.options[dropDown.selectedIndex].value;
+    document.getElementById("banktitle").value = selectedValue;}
+
+
+//when user clicks the list item title input, the bank <div> fades out
+$(document).ready(function() {
+    $("#banktitle").click(function(){
+        $("#banker").fadeOut("slow", function(){
+        });
+    });
+});
+
+
+//when user unfocuses the list title box the bank <div> fades in if an empty string is present
+$(document).ready(function() {
+    $("#banktitle").blur(function()
+    {
+       if(!$(this).val()){
+        $("#banker").fadeIn("slow");
+        }
+    });
+});
+
+
+
+
+
+
+//$(document).ready(function() {
+//function OnDropDownChange(dropDown) {
+//                    var selectedValue = dropDown.options[dropDown.selectedIndex].value;
+//                    document.getElementById("banktitle").value = selectedValue;}
+//                    });
+
+
+
+
+
+
+
 
 //  $( function() {
 //    $.widget( "custom.combobox", {
