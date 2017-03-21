@@ -5,13 +5,16 @@
     {% block title_block %}
     Home
     {% endblock %}
+    <script  src="{% static "memoryBankApp/quickitem-ajax.js" %}"></script>
 </head>
 
 
 {% block body_block %}
 
 <div class="container">
+
     <div id="homeLists">
+
         <div id=homeListsHeader>
             <h1>All {{ user.username }}'s Lists</h1>
             <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> Create New List</button>
@@ -22,12 +25,23 @@
             {% for list in allListsCol %}
             <div class="col-sm-3">
                 {% for List in list %}
-                <div class="listbox">
-                    <h4>{{List.title}}<button type="button" class="close deleteList" data-toggle="modal" data-target="#DeleteListModal"
-                        data-title="{{ List.title }}" data-id="{{ List.id }}" >&times;</button></h4>
+                <div class="listbox" id="{{ List.id }}">
+                    <h4>{{List.title}}<button type="button" class="close deleteList" data-toggle="modal" data-target="#DeleteListModal" data-title="{{ List.title }}" data-id="{{ List.id }}" >&times;</button></h4>
 
-                    <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-                        data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add list item</button>
+                    <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal" data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add list item</button>
+
+            		<form class="quick_item_form" method="post" action=""> <!-- action="/memorybank/quick_item/"-->
+            			{% csrf_token %}
+            			{% for hidden in quick_item_form.hidden_fields %}
+            				{{ hidden }}
+            			{% endfor %}
+            			{% for field in quick_item_form.visible_fields %}
+            				{{ field.errors }}
+            				{{ field.help_text }}
+            				{{ field }}
+            			{% endfor %}
+            		</form>
+
                     <ul>
                         {% for item in List.listitem_set.all  %}
                         {% if item %}
@@ -204,5 +218,7 @@
         </div>
     </div>
 </div>
+
+<script  src="{% static "memoryBankApp/quickitem-ajax.js" %}"></script>
 
 {% endblock %}

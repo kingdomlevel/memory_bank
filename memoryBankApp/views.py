@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from registration.backends.simple.views import RegistrationView
-from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm, EnhancedListForm, DeleteListForm
+from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm, EnhancedListForm, DeleteListForm, QuickItemForm
 from memoryBankApp.models import List, ListItem, BankItem, EnhancedList
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -50,6 +50,7 @@ def home(request, id=None):
 	newItemform = ListItemForm()
 	newListForm = ListForm()
 	del_list_form = DeleteListForm()
+	quick_item_form = QuickItemForm()
 	if request.method == 'POST' and 'submitAdd' in request.POST:
 		# pass the POST to form through forms.py
 		newItemform = ListItemForm(request.POST)
@@ -123,11 +124,43 @@ def home(request, id=None):
 
 	context_dict = {'allLists': allLists, 'allListsCol': allListsCol,
 					'listCount': listCount, 'form': newItemform,
-					'editItemForm':editItemForm, 'ListForm': newListForm}
+					'editItemForm':editItemForm, 'ListForm': newListForm,
+					'quick_item_form': quick_item_form}
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
 
+@login_required
+def quick_item(request):
+	quick_item_form = QuickItemForm()
+	if request.method == 'POST':
+		try:
+			# list_id = List.objects.get(request.POST["list_id"])
+			# list_id = request.POST.get('list_id')
+			# title = request.POST.get('title')
+			#print(title)
+			data = request.POST.get('formData')
+			quick_item_form = QuickItemForm(data)
+			print(quick_item_form)
 
+			#newItem = ListItem.objects.create(title=title)
+			#print("new item:" + newItem)
+
+			if quick_item_form.is_valid():
+				print("in if")
+				# newItem = quick_item_form.save(commit=False)
+				# newItem.list_id = list_id
+				# newItem.save(commit=True)
+			else:
+				# print errors to the terminal
+				print("errors")
+				print(quick_item_form.errors)
+
+			return HttpResponse("Update successful!")
+
+		except:
+			return HttpResponse("Oh... Update failed...")
+	# return HttpResponse("Update successful!")
+	return render(request, 'memoryBankApp/home.html', {})
 
 
 @login_required
