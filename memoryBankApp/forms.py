@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class ListForm(forms.ModelForm):
-    title = forms.CharField(max_length=List.max,
+    title = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}), max_length=List.max,
                             help_text="Please give your list a name.")
 
     class Meta:
@@ -14,7 +14,8 @@ class ListForm(forms.ModelForm):
 
 
 class ListItemForm(forms.ModelForm):
-    title = forms.CharField(max_length=ListItem.max, help_text="Please give your item a title")
+    title = forms.CharField(max_length=ListItem.max, help_text="Please give your item a title",
+                            widget=forms.TextInput(attrs={'autofocus': 'autofocus'}))
     priority_list = [(1,'low'), (2,'medium'), (3,'high')]
     priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?")
     notes = forms.CharField(widget=forms.Textarea, max_length=ListItem.notes_max,
@@ -26,7 +27,8 @@ class ListItemForm(forms.ModelForm):
 
 
 class EditItemForm(forms.ModelForm):
-    title = forms.CharField(max_length=ListItem.max, help_text="Change Title?", label="Title: ")
+    title = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
+                            max_length=ListItem.max, help_text="Change Title?", label="Title: ")
     priority_list = [(1,'low'), (2,'medium'), (3,'high')]
     priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?", label="Priority Level: ")
     notes = forms.CharField(widget=forms.Textarea,max_length=ListItem.notes_max,
@@ -58,7 +60,8 @@ class BankItemForm(forms.ModelForm):
 
 
 class EnhancedListForm(forms.ModelForm):
-    title = forms.CharField(max_length=EnhancedList.title_max, label="Title: ")
+    title = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
+                            max_length=EnhancedList.title_max, label="Title: ")
 
     class Meta:
         model = EnhancedList
