@@ -54,7 +54,6 @@ def home(request, id=None):
 
 			#Add the title of the list item to the bank (BankItems model)
 			bankTitle = title
-			#request.POST.get('title')
 			bankItem = BankItem.objects.create(title = bankTitle)
 			bankItem.save()
 			print (bankItem.title)
@@ -87,7 +86,8 @@ def home(request, id=None):
 		return HttpResponseRedirect('/memorybank/home')
 
 
-	banklist = BankItem.objects.filter()[:100]
+	bankTitleList = getSetOfBankTitles
+
 	allLists = List.objects.filter(user=request.user, removed='0')
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
@@ -99,9 +99,23 @@ def home(request, id=None):
 
 	context_dict = {'allLists': allLists, 'allListsCol': allListsCol,
 					'listCount': listCount, 'form': newItemform,
-					'ListForm': newListForm, 'banklist': banklist}
+					'ListForm': newListForm, 'banklist': bankTitleList}
 
 	return render(request, 'memoryBankApp/home.html', context_dict)
+
+
+
+
+
+
+
+
+def getSetOfBankTitles():
+	banklist = BankItem.objects.filter()[:100]
+	bankTitleList = set()
+	for b in banklist:
+		bankTitleList.add(b.title)
+	return bankTitleList
 
 
 
