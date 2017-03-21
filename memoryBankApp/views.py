@@ -57,17 +57,21 @@ def home(request, id=None):
 		if newItemform.is_valid():
 			print newItemform.fields
 			# pass the list ID from the POST to a variable
+			title = request.POST.get("banktitle")
 			id = request.POST.get('listID')
 			# save the form to a variable but don't commit to database
 			newItem = newItemform.save(commit=False)
 
+			#update list item title
+			newItem.title = title
 			# update the List attribute of list item
 			newItem.list_id = id
 			newItem.save()
 			newItemform = ListItemForm()
 
 			#Add the title of the list item to the bank (BankItems model)
-			bankTitle = request.POST.get('title')
+			bankTitle = title
+			#request.POST.get('title')
 			bankItem = BankItem.objects.create(title = bankTitle)
 			bankItem.save()
 			print (bankItem.title)
@@ -112,6 +116,7 @@ def home(request, id=None):
 			editItemForm.save()
 		else:
 			print(editItemForm.errors)
+	banklist = BankItem.objects.filter()[:100]
 	allLists = List.objects.filter(user=request.user, removed='0')
 	allLists = allLists.order_by('-modified_date')
 	listCount = len(allLists)		# gets total number of lists
@@ -123,7 +128,7 @@ def home(request, id=None):
 
 	context_dict = {'allLists': allLists, 'allListsCol': allListsCol,
 					'listCount': listCount, 'form': newItemform,
-					'editItemForm':editItemForm, 'ListForm': newListForm}
+					'editItemForm':editItemForm, 'ListForm': newListForm, 'banklist': banklist}
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
 

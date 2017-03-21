@@ -14,7 +14,7 @@ class ListForm(forms.ModelForm):
 
 
 class ListItemForm(forms.ModelForm):
-    title = forms.CharField(max_length=ListItem.max, help_text="Please give your item a title")
+    #title = forms.CharField(max_length=ListItem.max, help_text="Please give your item a title")
     priority_list = [(1,'low'), (2,'medium'), (3,'high')]
     priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?")
     notes = forms.CharField(widget=forms.Textarea, max_length=ListItem.notes_max,
@@ -22,7 +22,7 @@ class ListItemForm(forms.ModelForm):
     date = forms.DateField(widget=forms.SelectDateWidget, initial=date.today,)
     class Meta:
         model = ListItem
-        fields = ('title', 'date', 'priority', 'notes',)
+        fields = ( 'date', 'priority', 'notes',)
 
 
 class EditItemForm(forms.ModelForm):
