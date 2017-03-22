@@ -2,7 +2,7 @@
 
 <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal" data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add list item</button>
 
-<form class="quick_item_form" method="post" action=""> <!-- action="/memorybank/quick_item/"-->
+<form class="quick_item_form" method="post" action="">
     {% csrf_token %}
     {% for hidden in quick_item_form.hidden_fields %}
         {{ hidden }}

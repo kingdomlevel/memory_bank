@@ -135,49 +135,25 @@ def quick_item(request):
 	quick_item_form = QuickItemForm()
 	if request.method == 'POST':
 		try:
-			# list_id = List.objects.get(request.POST["list_id"])
-			# list_id = request.POST.get('list_id')
-			# title = request.POST.get('title')
-			#print(title)
-			print "before"
 			title = request.POST.get('title', '')
-			print(title)
 			list_id = request.POST.get('list_id', '')
-			print(list_id)
 			list = List.objects.get(pk=list_id)
-			# quick_item_form = QuickItemForm(data)
-			#print(quick_item_form)
 
+			# new list item with default values except title
 			newItem = ListItem(list=list, title=title, date=datetime.now(), priority='low', notes='', created_date=datetime.now(), modified_date=datetime.now())
 			newItem.save()
-			print(newItem)
-
-		# 	if quick_item_form.is_valid():
-		# 		print("in if")
-		# 		# newItem = quick_item_form.save(commit=False)
-		# 		# newItem.list_id = list_id
-		# 		# newItem.save(commit=True)
-		# 	else:
-		# 		# print errors to the terminal
-		# 		print("errors")
-		# 		print(quick_item_form.errors)
-		#
-		# 	return HttpResponse("Update successful!")
-		#
 		except Exception as e:
 	    		print '%s (%s)' % (e.message, type(e))
-		# 	return HttpResponse("Oh... Update failed...")
-	# return HttpResponse("Update successful!")
 	return render(request, 'memoryBankApp/update_list.html', {'List' : list})
 
 
+@login_required
 def update_list(request):
-	print("update list")
+	quick_item_form = QuickItemForm()
 	if request.method == 'POST':
 		try:
 			list_id = request.POST.get('list_id', '')
 			list = List.objects.get(pk=list_id)
-			quick_item_form = QuickItemForm()
 		except Exception as e:
 	    		print '%s (%s)' % (e.message, type(e))
 	return render(request, 'memoryBankApp/update_list.html', {'List' : list, 'quick_item_form' : quick_item_form})
