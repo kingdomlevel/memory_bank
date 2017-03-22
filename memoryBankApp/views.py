@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from registration.backends.simple.views import RegistrationView
-from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm, EnhancedListForm, DeleteListForm
+from memoryBankApp.forms import ListForm, ListItemForm, EditItemForm, EnhancedListForm, DeleteListForm, QuickItemForm
 from memoryBankApp.models import List, ListItem, BankItem, EnhancedList
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from datetime import datetime
 
 
 
@@ -22,6 +23,7 @@ def home(request, id=None):
 	newItemform = ListItemForm()
 	newListForm = ListForm()
 	del_list_form = DeleteListForm()
+	quick_item_form = QuickItemForm()
 	if request.method == 'POST' and 'submitAdd' in request.POST:
 		# pass the POST to form through forms.py
 		newItemform = ListItemForm(request.POST)
@@ -91,13 +93,40 @@ def home(request, id=None):
 
 	context_dict = {'allLists': allLists, 'allListsCol': allListsCol,
 					'listCount': listCount, 'form': newItemform,
-					'ListForm': newListForm, 'banklist': bankTitleList,
-					'allEnhanced': allEnhanced, 'enhancedCount': allEnhanced}
+					'ListForm': newListForm, 'quick_item_form': quick_item_form,
+					'banklist': bankTitleList, 'allEnhanced': allEnhanced,
+					'enhancedCount': allEnhanced, }
 
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
 
+@login_required
+def quick_item(request):
+	quick_item_form = QuickItemForm()
+	if request.method == 'POST':
+		try:
+			title = request.POST.get('title', '')
+			list_id = request.POST.get('list_id', '')
+			list = List.objects.get(pk=list_id)
 
+			# new list item with default values except title
+			newItem = ListItem(list=list, title=title, date=datetime.now(), priority='low', notes='', created_date=datetime.now(), modified_date=datetime.now())
+			newItem.save()
+		except Exception as e:
+	    		print '%s (%s)' % (e.message, type(e))
+	return render(request, 'memoryBankApp/update_list.html', {'List' : list})
+
+
+@login_required
+def update_list(request):
+	quick_item_form = QuickItemForm()
+	if request.method == 'POST':
+		try:
+			list_id = request.POST.get('list_id', '')
+			list = List.objects.get(pk=list_id)
+		except Exception as e:
+	    		print '%s (%s)' % (e.message, type(e))
+	return render(request, 'memoryBankApp/update_list.html', {'List' : list, 'quick_item_form' : quick_item_form})
 
 
 def getSetOfBankTitles(request):
@@ -107,9 +136,6 @@ def getSetOfBankTitles(request):
 		if b.user_id==request.user.id:
 			bankTitleList.add(b.title)
 	return bankTitleList
-
-
-
 
 
 @login_required

@@ -54,4 +54,8 @@ class DeleteListForm(forms.ModelForm):
 
     class Meta:
         model = List
-        fields = ('title',)
+        fields = ('title', )
+
+
+class QuickItemForm(forms.Form):
+    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-quick-item', 'required': True, 'placeholder': 'Quick item...'}))
