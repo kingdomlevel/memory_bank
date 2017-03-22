@@ -9,19 +9,20 @@
    data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add item</button>
 </h4>
 
-<form class="quick_item_form" method="post" action="">
-    {% csrf_token %}
-    {% for hidden in quick_item_form.hidden_fields %}
-        {{ hidden }}
-    {% endfor %}
-    {% for field in quick_item_form.visible_fields %}
-        {{ field.errors }}
-        {{ field.help_text }}
-        {{ field }}
-    {% endfor %}
-</form>
 
 <ul>
+
+    <form class="quick_item_form" method="post" action="">
+        {% csrf_token %}
+        {% for hidden in quick_item_form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        {% for field in quick_item_form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}
+        {% endfor %}
+    </form>
     {% for item in List.listitem_set.all  %}
     {% if item %}
     {% if item.removed %}
