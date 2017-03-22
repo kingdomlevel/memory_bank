@@ -1,34 +1,143 @@
-/* Index.html (before login!) */
-#index {
-   background-image: url(http://i.imgur.com/RJ18rRV.jpg);
-   background-size: auto;
+/* navbar header styles */
+#navbar {
+   box-shadow: 0 0 17px #333;
 }
 
-#index .col-sm-4 {
+#navbar a h3{
+   margin-top: 10px;
+   margin-bottom: 0;
+}
+
+.navbar-header a h3 {
+   margin-left: 60px;
+}
+
+/* Pages w/ centre boxes (e.g. index, log-in, register, etc) */
+.centre-box .col-sm-4 {
    background-color: white;
    margin-top: 50px;
+   margin-bottom: 50px;
    padding-top: 10px;
    padding-bottom: 10px;
+
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+
+   border-radius: 20px;
    border-style: solid;
+   border-width: thin;
+   border-color: #cccccc;
 }
 
-#index .col-sm-4 h1 {
-   border-bottom: thin solid #cccccc;
+.centre-box .col-sm-4 h1 {
+   border-bottom: thin solid #ccc;
+   margin-top: 0;
+   padding-bottom: 10px;
+
 
    color: #090909;
    font-size: 1.6em;
    text-align: center;
 }
 
-#index ul {
+.centre-box ul {
    list-style-type: none;
 }
 
 
+/* Styles for edit list item page */
+.centre-wide .col-sm-6,
+.centre-wide .col-sm-offset-2 {
+   background-color: white;
+   margin-top: 30px;
+   margin-bottom: 50px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+
+   border-radius: 20px;
+   border-style: solid;
+   border-width: thin;
+   border-color: #cccccc;
+}
+
+.centre-wide h2 {
+   border-bottom: thin solid #ccc;
+   margin-top: 0;
+   padding-bottom: 10px;
+
+   color: #090909;
+   font-size: 1.6em;
+   text-align: center;
+}
+
+.centre-wide .table .fieldLabel {
+   text-align: right;
+}
+
+
+
+/* Styles for enhanced list page */
+.centre-extraWide .col-sm-8,
+.centre-extraWide .col-sm-offset-2 {
+   background-color: white;
+   margin-top: 30px;
+   margin-bottom: 50px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+
+   border-radius: 20px;
+   border-style: solid;
+   border-width: thin;
+   border-color: #cccccc;
+}
+
+.col-sm-7 {
+   background-color: white;
+   margin-top: 30px;
+   margin-bottom: 50px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+
+   border-radius: 20px;
+   border-style: solid;
+   border-width: thin;
+   border-color: #cccccc;
+}
+
+.centre-extraWide h2 {
+   border-bottom: thin solid #ccc;
+   margin-top: 0;
+   padding-bottom: 10px;
+
+   color: #090909;
+   font-size: 1.6em;
+   text-align: center;
+}
+
+
+
+
+
+
+
 /* User's Home Page (home.html) */
 #homeLists {
-   background-color: white;
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+   margin-top: 40px;
+   margin-bottom: 50px;
+   padding-bottom: 20px;
 
+   border-radius: 20px;
    border-style: solid;
    border-width: thin;
    border-color: #cccccc;
@@ -42,18 +151,32 @@
    border-bottom: thin solid #cccccc;
 }
 
- h1 {
+h1 {
    color: #090909;
    font-size: 1.6em;
    text-align: center;
 
 }
+@media screen and (max-width: 767px){
+   h1{
+      margin-left: 20px;
+      text-align: left;
+   }
+}
 
+/* create new list button */
 #homeListsHeader .btn-group-lg>.btn, .btn-lg {
    float: right;
    margin: -50px 30px 0 0;
    font-size: 14px;
    line-height: 1.3333333;
+}
+#enhancedLink  {
+   float: left;
+   margin: 10px 0 0 30px;
+   /*margin: -50px 30px 0 0;
+   font-size: 14px;
+   line-height: 1.3333333;*/
 }
 
 
@@ -69,21 +192,95 @@ never eat shredded wheat */
    border-radius:5px;
    /*padding: 0 10 0 10px;*/
    margin: 10px 10px 0px 10px;
-   background-color:#eeeeee;
+   background-color:#f8f8f8;
+   border-style: solid;
+   border-color: #aaa;
 }
 
-.btn-info {
+.listbox h4 a {
+   padding-bottom: 10px;
+   border-bottom: thin dashed #ccc;
+   margin-bottom: 5px;
+}
+
+.listbox h4 {
+   padding-bottom: 10px;
+   border-bottom: thin dashed #ccc;
+   margin-bottom: 5px;
+   /*border-style: inset;*/
+}
+
+.listbox h6 {
+   border-style: dotted;
+}
+
+/* New list item button */
+.listbox .btn-info {
+   float: right;
+   padding: 2px 4px;
    margin-left: 10px;
+   margin-right: 10px;
    background-color: #aaaaaa;
    border-style: none;
+}
+
+.listbox .btn-info:hover {
+   background-color: lightblue;
+}
+
+/* delete list button */
+.listbox .deleteList {
+   float: right;
+   margin-right: 5px;
+}
+
+.listbox ul a {
+   color: #666;
+   /*border-bottom: thin solid #ccc;*/
+   /*text-decoration: underline;*/
+}
+
+.listbox ul a:hover {
+   color: lightblue;
+}
+
+.listbox hr {
+   border-color: #bbb;
+   margin-top: 2px;
+   margin-bottom: 2px;
+   margin-right: 20px;
+}
+
+.col-sm-10, .col-sm-offset-1 {
+   margin-left:3%;
+   width: 97%;
+}
+
+#enhancedBox {
+   margin-top: 30px;
+
+}
+
+#enhancedBox h1 {
+   border-bottom: thin solid #cccccc;
+   margin-bottom: 10px;
+}
+
+#enhancedBox ul {
+   margin-top:5px;
+   margin-left: 46px;
+   font-size: 1.2em;
+   list-style-type: none;
 }
 
 
 /* list titles on user's home page */
 .listbox h4 {
-    margin-left: 10px;
-    margin-right: 10px;
+   margin-left: 10px;
+   margin-right: 10px;
 }
+
+
 
 
 

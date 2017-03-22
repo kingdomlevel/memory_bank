@@ -1,26 +1,35 @@
 {% extends "memoryBankApp/base.html" %}
 {% load staticfiles %}
 {% block title_block %}
-    Edit List Item
+Edit List Item
 {% endblock %}
 {% block body_block %}
 
 
 <div class="container">
-    <form role="form" id="ListForm" method="post" action="">
-        <h2 class="form-signin-heading">Edit List Item</h2>
-        {% csrf_token %}
-        {% for field in form.visible_fields %}
-            {{ field.errors }}
-            {{ field.label }}<br/>
-            {{ field }}<br/><br/>
-        {% endfor %}
-        <input type="hidden" id="removeFormField" value="0" name="removeFormField" />
-        <br/>
-        <button class="btn btn-primary cancelEdit" type="button">Cancel</button>
-        <button class="btn btn-primary" type="submit" name="submitSave">Save</button>
-        <button type="button" class="btn btn-info btm-sm submitDelete" >Delete Item</button>
-    </form>
+   <div class="centre-box">
+      <div class = "centre-wide">
+         <div class="col-sm-6 col-sm-offset-3">
+            <form role="form" id="ListForm" method="post" action="">
+               <h2 class="form-signin-heading">Edit List Item</h2>
+               {% csrf_token %}
+               <table class = "table">
+               {% for field in form.visible_fields %}
+               <tr>
+                  <th class = "fieldLabel">{{ field.errors }} {{ field.label }}</th>
+                  <th class = "field">{{ field }}</th>
+               </tr>
+               {% endfor %}
+               </table>
+               <input type="hidden" id="removeFormField" value="0" name="removeFormField" />
+               <br/>
+               <button class="btn btn-primary cancelEdit" type="button">Cancel</button>
+               <button class="btn btn-primary" type="submit" name="submitSave">Save</button>
+               <button type="button" class="btn btn-info btm-sm submitDelete" >Delete Item</button>
+            </form>
+         </div>
+      </div>
+   </div>
 </div>
 
 {% endblock %}
