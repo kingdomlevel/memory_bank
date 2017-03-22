@@ -1,10 +1,10 @@
 // AJAX for posting
 function create_post(form) {
     console.log("create post is working!") // sanity check
-    var list_id = $(form).closest("div").prop("id");
+    var list_id = $(form).closest(".listbox").prop("id");
     //var title = $('#item-title').val()
     //var input = $("form input[id=id_title]");
-    var list_el_id = "#" + list_id;
+    var list_el_id = "#" + (list_id);
     console.log("list el id" + list_el_id);
     var input = $(list_el_id).find("#id_title");
     //var input = $(form).elements.namedItem('id_title')
@@ -27,8 +27,10 @@ function create_post(form) {
             $(input).focus(); // focus back onto the text field
             console.log(json); // log the returned json to the console
             console.log("success"); // another sanity check
-            $list_el_id.load("/memorybank/update_list/", {'list_id' : list_id});
-            $(list_el_id).find("#id_title").focus(); // focus back onto the text field
+            $(list_el_id).load("/memorybank/update_list/", {'list_id' : list_id}, function() {
+                $(list_el_id).find("#id_title").focus();
+            });
+            //$(list_el_id).find("#id_title").focus(); // focus back onto the text field
         },
 
         // handle a non-successful response
@@ -41,7 +43,7 @@ function create_post(form) {
 };
 
 // Submit post on submit
-$('.quick_item_form').on('submit', function(event){
+$('.listbox').on('submit', function(event){
     event.preventDefault();
     console.log("form submitted!")  // sanity check
     //console.log(event.target.id)    // sanity check

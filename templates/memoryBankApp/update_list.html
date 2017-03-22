@@ -1,10 +1,7 @@
 <h4>{{List.title}}<button type="button" class="close deleteList" data-toggle="modal" data-target="#DeleteListModal" data-title="{{ List.title }}" data-id="{{ List.id }}" >&times;</button></h4>
 
 <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal" data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add list item</button>
-<form>
-</form>
-<script>
-</script>
+
 <form class="quick_item_form" method="post" action=""> <!-- action="/memorybank/quick_item/"-->
     {% csrf_token %}
     {% for hidden in quick_item_form.hidden_fields %}
