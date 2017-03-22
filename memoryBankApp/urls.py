@@ -13,7 +13,6 @@ urlpatterns = [
     url(r'faq/', views.faq, name='faq'),
     url(r'^list/(?P<id>\d+)/$', views.edit_item, name='edit_item'),
     url(r'^home/$', views.home, name='home'),
-    url(r'^bankitems/$', views.bank_display, name= 'bank_display'),
     url(r'^enhancedlist/$', views.enhancedlist, name='enhancedlist'),
     url(r'^enhancedlist/(?P<id>\d+)/$', views.edit_enhanced_list, name='edit_enhanced_list'),
 	url(r'^quick_item/$', views.quick_item, name='quick_item'),
