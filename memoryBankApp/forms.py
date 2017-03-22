@@ -59,4 +59,4 @@ class DeleteListForm(forms.ModelForm):
 
 
 class QuickItemForm(forms.Form):
-    title = forms.CharField(max_length=ListItem.max, required='True', widget=forms.TextInput(attrs={'class': 'form-quick-item', 'placeholder': 'Quick item...'}))
+    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-quick-item', 'required': True, 'placeholder': 'Quick item...'}))
