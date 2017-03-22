@@ -92,9 +92,9 @@ def home(request, id=None):
 
 	context_dict = {'allLists': allLists, 'allListsCol': allListsCol,
 					'listCount': listCount, 'form': newItemform,
-					'editItemForm':editItemForm, 'ListForm': newListForm,
-					'quick_item_form': quick_item_form, 'banklist': bankTitleList,
-					'allEnhanced': allEnhanced, 'enhancedCount': allEnhanced}
+					'ListForm': newListForm, 'quick_item_form': quick_item_form,
+					'banklist': bankTitleList, 'allEnhanced': allEnhanced,
+					'enhancedCount': allEnhanced, }
 
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
