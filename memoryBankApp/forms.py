@@ -13,8 +13,6 @@ class ListForm(forms.ModelForm):
 
 
 class ListItemForm(forms.ModelForm):
-    # title = forms.CharField(max_length=ListItem.max, help_text="Please give your item a title",
-    #                         widget=forms.TextInput(attrs={'autofocus': 'autofocus'}))
     priority_list = [(1,'low'), (2,'medium'), (3,'high')]
     priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?")
     notes = forms.CharField(widget=forms.Textarea, max_length=ListItem.notes_max,
@@ -34,7 +32,7 @@ class EditItemForm(forms.ModelForm):
                             help_text="Any additional information?", label="Notes: ", required=False)
     date = forms.DateField(widget=forms.SelectDateWidget, initial=date.today, label="Due date: ")
     completed = forms.BooleanField(label="Mark as Completed:", required=False)
-    # removed = forms.BooleanField(label= "Mark for Deletion:", required=False)
+
     class Meta:
         model = ListItem
         fields = ('title', 'date', 'priority', 'notes', 'completed',)

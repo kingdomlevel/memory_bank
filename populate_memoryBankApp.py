@@ -1,17 +1,21 @@
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE',
-                      'memory_bank.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'memory_bank.settings')
 
 import django
 django.setup()
+
 from memoryBankApp.models import List, ListItem, BankItem, EnhancedList
 from django.contrib.auth.models import User
 
 def populate():
 
+    # add test user
+    # username: 'mike'
+    # password: 'P@ssword'
     add_mike()
 
-    #  create lists of dictionaries containing items and lists
+    # create lists of dictionaries containing enhanced lists,
+    # lists, list items and bank items
     shopping_items = [
         {"title": "Beans"},
         {"title": "Noodles"},
