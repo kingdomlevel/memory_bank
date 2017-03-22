@@ -97,6 +97,22 @@
    border-color: #cccccc;
 }
 
+.col-sm-7 {
+   background-color: white;
+   margin-top: 30px;
+   margin-bottom: 50px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+
+   background-color: #fff;
+   box-shadow: 0 0 17px #333;
+
+   border-radius: 20px;
+   border-style: solid;
+   border-width: thin;
+   border-color: #cccccc;
+}
+
 .centre-extraWide h2 {
    border-bottom: thin solid #ccc;
    margin-top: 0;
@@ -235,19 +251,24 @@ never eat shredded wheat */
    margin-right: 20px;
 }
 
-#enhancedBottom {
-   margin-top: -60px;
-   padding-right: 800px;
+.col-sm-10, .col-sm-offset-1 {
+   margin-left:3%;
+   width: 97%;
 }
 
-#enhancedBottom h1 {
+#enhancedBox {
+   margin-top: 30px;
+
+}
+
+#enhancedBox h1 {
    border-bottom: thin solid #cccccc;
    margin-bottom: 10px;
 }
 
-#enhancedBottom ul {
+#enhancedBox ul {
    margin-top:5px;
-   margin-left: 58px;
+   margin-left: 46px;
    font-size: 1.2em;
    list-style-type: none;
 }

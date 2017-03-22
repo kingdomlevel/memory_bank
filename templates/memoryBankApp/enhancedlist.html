@@ -7,58 +7,68 @@ Enhanced List
 
 <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 
-{% if allEnhanced %}
-<!-- include enhanced lists -->
-<div class="container" id ="enhancedBottom">
-   <div class="col-sm-3 col-md-2 sidebar">
-      <div id="homeLists">
-      <h1>Enhanced Lists</h1>
-      <div class="row">
-      <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
 
-         <div class="col-sm-12">
-
-
-               <ul>
-                  {% for EnhancedList in allEnhanced %}
-                  <li>
-
-                     <a href="{% url 'edit_enhanced_list' id=EnhancedList.id %}" class="enhancedListLink" data-id="{{ EnhancedList.id}}">{{ EnhancedList.title }}</a>
-                  </li>
-
-                  {% endfor %}
-               </ul>
-            </div>
-            <!--</div>-->
-         </div>
-      </div>
-   </div>
-</div>
-{% endif %}
 
 
 <div class="container">
    <div class="centre-box">
       <div class = "centre-extraWide">
-         <div class="col-sm-8 col-sm-offset-2">
-            <form role="form" id="EnhancedListForm" method="post" >
-               <h2 class="form-signin-heading">Create Enhanced List</h2>
-               {% csrf_token %}
-         
-                {{ form.title.label }}
-                {{ form.title }}<br/><br/>
-               
-               <div id="hiddentext">
-                    {{ form.long_text }}
-               </div>  
+         <div class="col-sm-10 col-sm-offset-1">
+            <div class="col-sm-7">
 
-               <textarea name="editor1"></textarea>
-               <script>
-               CKEDITOR.replace( 'editor1' );
-               </script>
-               <br />
-               <button class="btn btn-primary submitEnhanced" type="submit" name="submitEnhanced">Save</button>
-            </form>
+
+
+               <form role="form" id="EnhancedListForm" method="post" >
+                  <h2 class="form-signin-heading">Create Enhanced List</h2>
+                  {% csrf_token %}
+
+                  {{ form.title.label }}
+                  {{ form.title }}<br/><br/>
+
+                  <div id="hiddentext">
+                     {{ form.long_text }}
+                  </div>
+
+                  <textarea name="editor1"></textarea>
+                  <script>
+                  CKEDITOR.replace( 'editor1' );
+                  </script>
+                  <br />
+                  <button class="btn btn-primary submitEnhanced" type="submit" name="submitEnhanced">Save</button>
+               </form>
+            </div>
+            <div class="col-sm-1">            </div>
+            <div class="col-sm-4" id="enhancedBox">
+               {% if allEnhanced %}
+               <!-- include enhanced lists -->
+
+
+                     <h1>Enhanced Lists</h1>
+                     <div class="row">
+
+
+                        <div class="col-sm-12">
+
+
+
+
+                           <ul>
+                              {% for EnhancedList in allEnhanced %}
+                              <li>
+
+                                 <a href="{% url 'edit_enhanced_list' id=EnhancedList.id %}" class="enhancedListLink" data-id="{{ EnhancedList.id}}">{{ EnhancedList.title }}</a>
+                              </li>
+
+                              {% endfor %}
+                           </ul>
+
+                        </div>
+                     </div>
+
+
+
+               {% endif %}
+            </div>
          </div>
       </div>
    </div>
