@@ -39,8 +39,7 @@ Enhanced List
             </div>
             <div class="col-sm-1">            </div>
             <div class="col-sm-4" id="enhancedBox">
-               {% if allEnhanced %}
-               <!-- include enhanced lists -->
+
 
 
                      <h1>Enhanced Lists</h1>
@@ -50,7 +49,8 @@ Enhanced List
                         <div class="col-sm-12">
 
 
-
+                         {% if allEnhanced %}
+                            <!-- include enhanced lists -->
 
                            <ul>
                               {% for EnhancedList in allEnhanced %}
