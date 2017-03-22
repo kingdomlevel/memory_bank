@@ -6,6 +6,34 @@ Enhanced List
 
 <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
 
+{% if allEnhanced %}
+<!-- include enhanced lists -->
+<div class="container" id ="enhancedBottom">
+   <div class="col-sm-3 col-md-2 sidebar">
+      <div id="homeLists">
+      <h1>Enhanced Lists</h1>
+      <div class="row">
+      <!--<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">-->
+
+         <div class="col-sm-12">
+
+
+               <ul>
+                  {% for EnhancedList in allEnhanced %}
+                  <li>
+
+                     <a href="{% url 'edit_enhanced_list' id=EnhancedList.id %}" class="enhancedListLink" data-id="{{ EnhancedList.id}}">{{ EnhancedList.title }}</a>
+                  </li>
+
+                  {% endfor %}
+               </ul>
+            </div>
+            <!--</div>-->
+         </div>
+      </div>
+   </div>
+</div>
+{% endif %}
 
 <div class="container">
    <div class="centre-box">
@@ -31,5 +59,6 @@ Enhanced List
       </div>
    </div>
 </div>
+
 
 {% endblock %}
