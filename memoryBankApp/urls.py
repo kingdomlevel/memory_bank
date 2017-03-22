@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^banktest/$', views.banktest, name='banktest'),
     url(r'^enhancedlist/$', views.enhancedlist, name='enhancedlist'),
 	url(r'^quick_item/$', views.quick_item, name='quick_item'),
+    url(r'^update_list/$', views.update_list, name='update_list'),
     # url(r'about/', views.about, name='about'),
     # url(r'contact/', views.contact, name='contact'),
     # url(r'faq/', views.faq, name='faq'),

@@ -74,8 +74,8 @@ class DeleteListForm(forms.ModelForm):
 
 
 class QuickItemForm(forms.ModelForm):
-    title = forms.CharField(max_length=ListItem.max, required='True', widget=forms.TextInput(attrs={'id': 'item-title', 'required': True}))
-    # title = forms.CharField(max_length=ListItem.max, required='True')
+    #title = forms.CharField(max_length=ListItem.max, required='True', widget=forms.TextInput(attrs={'id': 'item-title', 'required': True}))
+    title = forms.CharField(max_length=ListItem.max, required='True')
     priority_list = [(1, 'low'), (2, 'medium'), (3, 'high')]
     #priority = forms.ChoiceField(widget=forms.HiddenInput(), initial=(1,'low'))
     #date = forms.DateField(widget=forms.HiddenInput(), initial=date.today)

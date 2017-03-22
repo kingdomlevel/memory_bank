@@ -1,22 +1,33 @@
 // AJAX for posting
 function create_post(form) {
     console.log("create post is working!") // sanity check
-    var title = $('#item-title').val()
-    var formData = $(form).serializeArray()
-    console.log("form data:" + (title))
     var list_id = $(form).closest("div").prop("id");
+    //var title = $('#item-title').val()
+    //var input = $("form input[id=id_title]");
+    var list_el_id = "#" + list_id;
+    console.log("list el id" + list_el_id);
+    var input = $(list_el_id).find("#id_title");
+    //var input = $(form).elements.namedItem('id_title')
+    var title = (input).val();
+    console.log(form);
+    //var formData = $(form).serialize()
+    //var formData = new FormData((form))
+    console.log("form data:" + title);
     $.ajax({
         url : "/memorybank/quick_item/", // the endpoint
         type : "POST", // http method
-        // data : { 'title' : title },  // , list_id: list_id }, // data sent with the post request
-        data : { formData : formData },
+        // processData: false,
+        // contentType: false,
+        data : { title : title, list_id : list_id }, // data sent with the post request
+        //data : {title : title },
 
         // handle a successful response
         success : function(json) {
-            $('#id_title').val(''); // remove the value from the input
-            $('#id_title').focus(); // focus back onto the text field
+            $(input).val(''); // remove the value from the input
+            $(input).focus(); // focus back onto the text field
             console.log(json); // log the returned json to the console
             console.log("success"); // another sanity check
+            $(list_el_id).load("/memorybank/update_list/", {'list_id' : list_id});
         },
 
         // handle a non-successful response

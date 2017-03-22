@@ -42,7 +42,7 @@ class ListItem(models.Model):
     title = models.CharField(max_length=max)
     date = models.DateField(null=True, blank=True)
     priority = models.CharField(max_length=30, null=True, blank=True)
-    status = models.CharField(max_length=30, null=True, blank=True)
+    # status = models.CharField(max_length=30, null=True, blank=True)
     notes_max = 999
     notes = models.CharField(max_length=notes_max, null=True, blank=True)
     created_date = models.DateTimeField(auto_now_add=True)

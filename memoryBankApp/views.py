@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from datetime import datetime
 
 
 
@@ -138,29 +139,47 @@ def quick_item(request):
 			# list_id = request.POST.get('list_id')
 			# title = request.POST.get('title')
 			#print(title)
-			data = request.POST.get('formData')
-			quick_item_form = QuickItemForm(data)
-			print(quick_item_form)
+			print "before"
+			title = request.POST.get('title', '')
+			print(title)
+			list_id = request.POST.get('list_id', '')
+			print(list_id)
+			list = List.objects.get(pk=list_id)
+			# quick_item_form = QuickItemForm(data)
+			#print(quick_item_form)
 
-			#newItem = ListItem.objects.create(title=title)
-			#print("new item:" + newItem)
+			newItem = ListItem(list=list, title=title, date=datetime.now(), priority='low', notes='', created_date=datetime.now(), modified_date=datetime.now())
+			newItem.save()
+			print(newItem)
 
-			if quick_item_form.is_valid():
-				print("in if")
-				# newItem = quick_item_form.save(commit=False)
-				# newItem.list_id = list_id
-				# newItem.save(commit=True)
-			else:
-				# print errors to the terminal
-				print("errors")
-				print(quick_item_form.errors)
-
-			return HttpResponse("Update successful!")
-
-		except:
-			return HttpResponse("Oh... Update failed...")
+		# 	if quick_item_form.is_valid():
+		# 		print("in if")
+		# 		# newItem = quick_item_form.save(commit=False)
+		# 		# newItem.list_id = list_id
+		# 		# newItem.save(commit=True)
+		# 	else:
+		# 		# print errors to the terminal
+		# 		print("errors")
+		# 		print(quick_item_form.errors)
+		#
+		# 	return HttpResponse("Update successful!")
+		#
+		except Exception as e:
+	    		print '%s (%s)' % (e.message, type(e))
+		# 	return HttpResponse("Oh... Update failed...")
 	# return HttpResponse("Update successful!")
-	return render(request, 'memoryBankApp/home.html', {})
+	return render(request, 'memoryBankApp/update_list.html', {'List' : list})
+
+
+def update_list(request):
+	print("update list")
+	if request.method == 'POST':
+		try:
+			list_id = request.POST.get('list_id', '')
+			list = List.objects.get(pk=list_id)
+		except Exception as e:
+	    		print '%s (%s)' % (e.message, type(e))
+	return render(request, 'memoryBankApp/update_list.html', {'List' : list})
 
 
 @login_required
