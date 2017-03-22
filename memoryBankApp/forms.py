@@ -1,7 +1,6 @@
 from django import forms
-from memoryBankApp.models import List, ListItem, Bank, BankItem, EnhancedList
+from memoryBankApp.models import List, ListItem, EnhancedList
 from datetime import date
-from django.contrib.auth.models import User
 
 
 class ListForm(forms.ModelForm):

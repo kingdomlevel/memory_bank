@@ -16,17 +16,6 @@ def index(request):
 	return response
 
 
-# @login_required
-# def delete_list(request):
-# 	#del_list_form = DeleteListForm()
-# 	if request.method == 'POST' and 'submitDeleteList' in request.POST:
-# 		form = DeleteListForm(request.POST)
-# 		id = request.POST.get('listID')
-#
-# 	context_dict = {'form': DeleteListForm}
-#
-# 	return render(request, 'memoryBankApp/home.html', context_dict)
-
 
 @login_required
 def home(request, id=None):
