@@ -33,7 +33,7 @@
         <div class="row">
             {% if allLists %}
                 {% for list in allListsCol %}
-                    <div class="col-sm-3">
+                    <div class="col-sm-4">
                         {% for List in list %}
                             <div class="listbox" id="{{ List.id }}">
                                 {% include 'memoryBankApp/update_list.html' %}
@@ -44,34 +44,6 @@
             {% else %}
                 <center><h3> You don't have any lists yet</h3></center>
             {% endif %}
-
-            <!-- 4th Column Quicklist thingy -->
-            <div class="col-sm-3">
-                <!--<div class="listbox">
-                <li><h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4></li>
-                <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-                data-title="{{ List.title }}" data-id="{{ List.id }}" >Add list item</button>
-                <ul>
-                {% for item in List.listitem_set.all  %}
-                {% if item %}
-                {% if item.removed %}-->
-                <!--Do nothing-->
-                <!--{% else %}
-                {% if item.completed %}
-                <del>
-                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                </del>
-                {% else %}
-                <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                {% endif %}
-                {% endif %}
-                {% else %}
-                <li> no items in this! </li>
-                {% endif %}
-                {% endfor  %}
-                </div>-->
-            </div>
-
         </div> <!-- End of row -->
     </div> <!-- End of homelists -->
 </div> <!-- End of container -->

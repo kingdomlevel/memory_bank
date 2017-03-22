@@ -24,21 +24,25 @@
         {% endfor %}
     </form>
     {% for item in List.listitem_set.all  %}
-    {% if item %}
-    {% if item.removed %}
-    <!--Do nothing-->
-    {% else %}
-    {% if item.completed %}
-    <del>
-        <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-    </del>
-    {% else %}
-    <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-    {% endif %}
-    {% endif %}
 
-    {% else %}
-    <li> no items in this! </li>
-    {% endif %}
+        {% if item %}
+
+            {% if item.removed %}
+                <!--Do nothing-->
+            {% else %}
+                {% if item.completed %}
+                    <del>
+                        <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                    </del>
+                {% else %}
+                    <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+                {% endif %}
+                <hr />
+            {% endif %}
+
+        {% else %}
+            <li> no items in this! </li>
+        {% endif %}
+
     {% endfor  %}
 </ul>
