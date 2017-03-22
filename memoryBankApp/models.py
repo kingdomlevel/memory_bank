@@ -41,27 +41,18 @@ class ListItem(models.Model):
         return unicode(self.title)
 
 
-class Bank(models.Model):
-    max = 128
-    title = models.CharField(max_length=max)
-
-    def __str__(self):
-        return self.title
-
-    def __unicode__(self):
-        return self.title
-
 
 class BankItem(models.Model):
     max = 128
     title = models.CharField(max_length=max)
-    bank = models.ForeignKey(Bank, null=True, blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.title
 
     def __unicode__(self):
         return self.title
+
 
 class EnhancedList(models.Model):
     title_max = 128

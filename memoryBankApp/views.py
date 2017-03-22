@@ -43,6 +43,7 @@ def home(request, id=None):
 			#Add the title of the list item to the bank (BankItems model)
 			bankTitle = title
 			bankItem = BankItem.objects.create(title = bankTitle)
+			bankItem.user = request.user
 			bankItem.save()
 			print (bankItem.title)
 			return HttpResponseRedirect('/memorybank/home')
@@ -74,7 +75,7 @@ def home(request, id=None):
 		return HttpResponseRedirect('/memorybank/home')
 
 
-	bankTitleList = getSetOfBankTitles
+	bankTitleList = getSetOfBankTitles(request)
 
 	allLists = List.objects.filter(user=request.user, removed='0')
 	allLists = allLists.order_by('-modified_date')
@@ -99,12 +100,12 @@ def home(request, id=None):
 
 
 
-
-def getSetOfBankTitles():
+def getSetOfBankTitles(request):
 	banklist = BankItem.objects.filter()[:100]
 	bankTitleList = set()
 	for b in banklist:
-		bankTitleList.add(b.title)
+		if b.user_id==request.user.id:
+			bankTitleList.add(b.title)
 	return bankTitleList
 
 
