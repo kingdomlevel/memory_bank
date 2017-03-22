@@ -27,7 +27,8 @@ function create_post(form) {
             $(input).focus(); // focus back onto the text field
             console.log(json); // log the returned json to the console
             console.log("success"); // another sanity check
-            $(list_el_id).load("/memorybank/update_list/", {'list_id' : list_id});
+            $list_el_id.load("/memorybank/update_list/", {'list_id' : list_id});
+            $(list_el_id).find("#id_title").focus(); // focus back onto the text field
         },
 
         // handle a non-successful response

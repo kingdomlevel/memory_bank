@@ -177,9 +177,10 @@ def update_list(request):
 		try:
 			list_id = request.POST.get('list_id', '')
 			list = List.objects.get(pk=list_id)
+			quick_item_form = QuickItemForm()
 		except Exception as e:
 	    		print '%s (%s)' % (e.message, type(e))
-	return render(request, 'memoryBankApp/update_list.html', {'List' : list})
+	return render(request, 'memoryBankApp/update_list.html', {'List' : list, 'quick_item_form' : quick_item_form})
 
 
 @login_required

@@ -1,0 +1,39 @@
+<h4>{{List.title}}<button type="button" class="close deleteList" data-toggle="modal" data-target="#DeleteListModal" data-title="{{ List.title }}" data-id="{{ List.id }}" >&times;</button></h4>
+
+<button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal" data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add list item</button>
+<form>
+</form>
+<script>
+</script>
+<form class="quick_item_form" method="post" action=""> <!-- action="/memorybank/quick_item/"-->
+    {% csrf_token %}
+    {% for hidden in quick_item_form.hidden_fields %}
+        {{ hidden }}
+    {% endfor %}
+    {% for field in quick_item_form.visible_fields %}
+        {{ field.errors }}
+        {{ field.help_text }}
+        {{ field }}
+    {% endfor %}
+</form>
+
+<ul>
+    {% for item in List.listitem_set.all  %}
+    {% if item %}
+    {% if item.removed %}
+    <!--Do nothing-->
+    {% else %}
+    {% if item.completed %}
+    <del>
+        <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+    </del>
+    {% else %}
+    <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
+    {% endif %}
+    {% endif %}
+
+    {% else %}
+    <li> no items in this! </li>
+    {% endif %}
+    {% endfor  %}
+</ul>
