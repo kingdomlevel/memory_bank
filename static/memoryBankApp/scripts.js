@@ -1,4 +1,4 @@
-
+// Copies the list ID to to the list item form.
 $(document).ready(function() {
     $('.listButton').click(function(e) {
         target = $(e.target);
@@ -10,7 +10,8 @@ $(document).ready(function() {
     });
 });
 
-
+// Copies text from the editor on the edit enhanced list  
+// page to a form field that saves to the database.
 $(document).ready(function() {
     text = $('#id_long_text');
     $('#editor1').val(text.val());
@@ -18,7 +19,9 @@ $(document).ready(function() {
 });
 
 
-
+// triggered by the 'x' in the listboxes and sets
+// a boolean field to true so that it no longer
+// appears on the home page.
 $(document).ready(function() { 
     $('.deleteList').click(function(e) {
         target = $(e.target);
@@ -32,37 +35,42 @@ $(document).ready(function() {
 });
 
 
-$('AddListForm').submit(function(){
-    alert(title);
-    target = $(e.target);
-    title = target.attr('data-title');
-});
+// $('AddListForm').submit(function(){
+//     alert(title);
+//     target = $(e.target);
+//     title = target.attr('data-title');
+// });
 
 
-$(document).ready(function(){
-  $('.submitAddList').submit(function(){
-      doc = document.getElementById("AddListForm")
-      target = $(e.target);
-      title = target.attr('data-title');
-      alert(doc.title);
 
-  });
-});
+//  
+// $(document).ready(function(){
+//   $('.submitAddList').submit(function(){
+//       doc = document.getElementById("AddListForm")
+//       target = $(e.target);
+//       title = target.attr('data-title');
+//       alert(doc.title);
 
+//   });
+// });
+
+// Redirects back to home if the user clicks 
+// the cancel button 
 $(document).ready(function() {
       $('.cancelEdit').click(function() {
       window.location.href = "/memorybank/home";       
       });
   });
 
-
+// Redirects back to home if the user clicks 
+// the cancel button 
 $(document).ready(function() {
       $('.cancelDelete').click(function() {
       window.location.href = "/memorybank/home";       
       });
   });
 
-
+// triggers confirmation page before deleting a list
 $(document).ready(function() {
     $('.submitDelete').click(function() {
         if (confirm("Are you sure you want to delete this item?")){

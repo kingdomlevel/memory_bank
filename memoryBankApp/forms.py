@@ -41,24 +41,6 @@ class EditItemForm(forms.ModelForm):
         fields = ('title', 'date', 'priority', 'notes', 'completed',)
 
 
-class BankForm(forms.ModelForm):
-
-
-
-    class Meta:
-        model = Bank
-        fields = ()
-
-
-class BankItemForm(forms.ModelForm):
-
-
-
-    class Meta:
-        model = BankItem
-        fields = ()
-
-
 class EnhancedListForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
                             max_length=EnhancedList.title_max, label="Title: ")

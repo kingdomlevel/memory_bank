@@ -36,7 +36,6 @@ def home(request, id=None):
 	if request.method == 'POST' and 'submitAdd' in request.POST:
 		# pass the POST to form through forms.py
 		newItemform = ListItemForm(request.POST)
-		print "SUBMITTED!!!"
 		if newItemform.is_valid():
 			print newItemform.fields
 			# pass the list ID from the POST to a variable
@@ -108,8 +107,6 @@ def home(request, id=None):
 
 
 
-
-
 def getSetOfBankTitles():
 	banklist = BankItem.objects.filter()[:100]
 	bankTitleList = set()
@@ -147,17 +144,14 @@ def edit_item(request, id=None):
 def edit_enhanced_list(request, id=None):
 	instance = get_object_or_404(EnhancedList, id=id)
 	user = instance.user_id
-	# print('instance user:')
-	# print(instance.user_id)
-	# print('user:')
-	# print(user)
-	# print(request.user.id)
 	if (user != request.user.id):
 		return HttpResponse("You are not authorised to access this content")
 	else:
 		enhanced_list_form = EnhancedListForm(request.POST or None, instance=instance)
 		if enhanced_list_form.is_valid():
-
+			instance = enhanced_list_form.save(commit=False)
+			text = request.POST.get('editor1')
+			instance.long_text = text
 			instance.save()
 			return HttpResponseRedirect('/memorybank/home')
 	context={'form': enhanced_list_form,}
@@ -260,7 +254,6 @@ def enhancedlist(request):
 	if request.method == 'POST':
 		form = EnhancedListForm(request.POST)
 		if form.is_valid():
-			print("POSTED")
 			text = request.POST.get('editor1')
 			user = request.user
 			new_enhanced = form.save(commit=False)
@@ -270,7 +263,6 @@ def enhancedlist(request):
 			form = EnhancedListForm()
 			return HttpResponseRedirect('/memorybank/home')
 		else:
-			print("NOT POSTED!!!!!")
 			print(form.errors)
 
 	context_dict = {'form': form}
