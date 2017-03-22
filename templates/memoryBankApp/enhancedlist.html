@@ -5,31 +5,74 @@ Enhanced List
 {% block body_block %}
 
 
+<script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
+
+
+
+
 <div class="container">
    <div class="centre-box">
       <div class = "centre-extraWide">
-         <div class="col-sm-8 col-sm-offset-2">
-            <form role="form" id="EnhancedListForm" method="post" >
-               <h2 class="form-signin-heading">Create Enhanced List</h2>
-               {% csrf_token %}
-         
-                {{ form.title.label }}
-                {{ form.title }}<br/><br/>
-               
-               <div id="hiddentext">
-                    {{ form.long_text }}
-               </div>  
+         <div class="col-sm-10 col-sm-offset-1">
+            <div class="col-sm-7">
 
-               <textarea name="editor1"></textarea>
-               <script>
-               CKEDITOR.replace( 'editor1' );
-               </script>
-               <br />
-               <button class="btn btn-primary submitEnhanced" type="submit" name="submitEnhanced">Save</button>
-            </form>
+
+
+               <form role="form" id="EnhancedListForm" method="post" >
+                  <h2 class="form-signin-heading">Create Enhanced List</h2>
+                  {% csrf_token %}
+
+                  {{ form.title.label }}
+                  {{ form.title }}<br/><br/>
+
+                  <div id="hiddentext">
+                     {{ form.long_text }}
+                  </div>
+
+                  <textarea name="editor1"></textarea>
+                  <script>
+                  CKEDITOR.replace( 'editor1' );
+                  </script>
+                  <br />
+                  <button class="btn btn-primary submitEnhanced" type="submit" name="submitEnhanced">Save</button>
+               </form>
+            </div>
+            <div class="col-sm-1">            </div>
+            <div class="col-sm-4" id="enhancedBox">
+
+
+
+                     <h1>Enhanced Lists</h1>
+                     <div class="row">
+
+
+                        <div class="col-sm-12">
+
+
+                         {% if allEnhanced %}
+                            <!-- include enhanced lists -->
+
+                           <ul>
+                              {% for EnhancedList in allEnhanced %}
+                              <li>
+
+                                 <a href="{% url 'edit_enhanced_list' id=EnhancedList.id %}" class="enhancedListLink" data-id="{{ EnhancedList.id}}">{{ EnhancedList.title }}</a>
+                              </li>
+
+                              {% endfor %}
+                           </ul>
+
+                        </div>
+                     </div>
+
+
+
+               {% endif %}
+            </div>
          </div>
       </div>
    </div>
 </div>
+
 
 {% endblock %}

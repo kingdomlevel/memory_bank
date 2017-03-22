@@ -82,10 +82,6 @@ def home(request, id=None):
 
 	allEnhanced = EnhancedList.objects.filter(user=request.user)
 	allEnhanced = allEnhanced.order_by('title')
-	for a in allEnhanced:
-		print(a.title)
-	enhancedCount = len(allEnhanced)
-
 
 	allListsCol = []
 	cols = 3
@@ -245,7 +241,7 @@ def testitemform(request):
 	context_dict = {'form': form}
 	return render(request, 'memoryBankApp/testitem.html', context_dict)
 
-
+@login_required
 def enhancedlist(request):
 	form = EnhancedListForm()
 	if request.method == 'POST':
@@ -261,6 +257,7 @@ def enhancedlist(request):
 			return HttpResponseRedirect('/memorybank/home')
 		else:
 			print(form.errors)
-
-	context_dict = {'form': form}
+	allEnhanced = EnhancedList.objects.filter(user=request.user)
+	allEnhanced = allEnhanced.order_by('title')
+	context_dict = {'form': form, 'allEnhanced': allEnhanced,}
 	return render(request, 'memoryBankApp/enhancedlist.html', context_dict)

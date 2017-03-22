@@ -11,13 +11,23 @@
 {% block body_block %}
 
 
+<!-- white container for all lists -->
 <div class="container">
    <div id="homeLists">
+
+      <!-- header for white container area -->
       <div id=homeListsHeader>
+
+         <form type="POST" action="{% url 'enhancedlist' %}">
+            <button type="submit" class="btn btn-info btn-lg" id="enhancedLink">Enhanced Lists</button>
+         </form>
+
+
          <h1>
             All {{ user.username }}'s Lists
          </h1>
-         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> Create New List</button>
+
+         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> New List</button>
       </div>
 
       <div class="row">
@@ -240,35 +250,4 @@
       </div>
    </div>
 </div>
-
-{% if allEnhanced %}
-<!-- include enhanced lists -->
-<div class="container" id ="enhancedBottom">
-   <div id="homeLists">
-      <h1>Enhanced Lists</h1>
-      <div class="row">
-
-
-         <div class="col-sm-12">
-
-
-
-
-               <ul>
-                  {% for EnhancedList in allEnhanced %}
-                  <li>
-
-                     <a href="{% url 'edit_enhanced_list' id=EnhancedList.id %}" class="enhancedListLink" data-id="{{ EnhancedList.id}}">{{ EnhancedList.title }}</a>
-                  </li>
-
-                  {% endfor %}
-               </ul>
-            
-         </div>
-      </div>
-   </div>
-</div>
-
-{% endif %}
-
 {% endblock %}
