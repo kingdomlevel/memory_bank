@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 
 def populate():
 
+    add_mike()
 
     #  create lists of dictionaries containing items and lists
     shopping_items = [
@@ -40,10 +41,11 @@ def populate():
 
     for elist in elists:
         add_enhanced(elist, 1)
+        print(elist)
 
     for blist in blists:
         add_bank_item(blist, 1)
-
+        print(blist)
 
 
 def add_item(list, title):
