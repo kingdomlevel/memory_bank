@@ -1,7 +1,6 @@
 from django import forms
-from memoryBankApp.models import List, ListItem, Bank, BankItem, EnhancedList
+from memoryBankApp.models import List, ListItem, EnhancedList
 from datetime import date
-from django.contrib.auth.models import User
 
 
 class ListForm(forms.ModelForm):
@@ -14,8 +13,6 @@ class ListForm(forms.ModelForm):
 
 
 class ListItemForm(forms.ModelForm):
-    # title = forms.CharField(max_length=ListItem.max, help_text="Please give your item a title",
-    #                         widget=forms.TextInput(attrs={'autofocus': 'autofocus'}))
     priority_list = [(1,'low'), (2,'medium'), (3,'high')]
     priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?")
     notes = forms.CharField(widget=forms.Textarea, max_length=ListItem.notes_max,
@@ -35,7 +32,7 @@ class EditItemForm(forms.ModelForm):
                             help_text="Any additional information?", label="Notes: ", required=False)
     date = forms.DateField(widget=forms.SelectDateWidget, initial=date.today, label="Due date: ")
     completed = forms.BooleanField(label="Mark as Completed:", required=False)
-    # removed = forms.BooleanField(label= "Mark for Deletion:", required=False)
+
     class Meta:
         model = ListItem
         fields = ('title', 'date', 'priority', 'notes', 'completed',)
@@ -44,8 +41,7 @@ class EditItemForm(forms.ModelForm):
 class EnhancedListForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
                             max_length=EnhancedList.title_max, label="Title: ")
-    #long_text = forms.CharField(widget=forms.HiddenInput())
-
+    
     class Meta:
         model = EnhancedList
         fields = ('title', 'long_text',)
@@ -56,4 +52,12 @@ class DeleteListForm(forms.ModelForm):
 
     class Meta:
         model = List
+<<<<<<< HEAD
         fields = ('title',)
+=======
+        fields = ('title', )
+
+
+class QuickItemForm(forms.Form):
+    title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-quick-item', 'required': True, 'placeholder': 'Quick item...'}))
+>>>>>>> 6a3bbe43b3656453bb3cdbdf795c75294b057c0f

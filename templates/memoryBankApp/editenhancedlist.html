@@ -10,23 +10,23 @@ Edit Enhanced List
       <div class = "centre-extraWide">
          <div class="col-sm-8 col-sm-offset-2">
             <form role="form" id="EnhancedListForm" method="post" >
-               <h2 class="form-signin-heading">Create Enhanced List</h2>
+               <h2 class="form-signin-heading">Edit Enhanced List</h2>
                {% csrf_token %}
 
                {{ form.title.label }}
                {{ form.title }}<br/><br/>
-               
+
                <div id="hiddentext">
                     {{ form.long_text }}
-               </div>               
+               </div>
 
                <textarea id="editor1" name="editor1"></textarea>
                <script>
                CKEDITOR.replace( 'editor1' );
                </script>
                <br />
+               <button class="btn btn-primary cancelEnhancedEdit" type="button">Back</button>
                <button class="btn btn-primary submitEnhanced" type="submit" name="submitEnhanced">Save</button>
-            </form>
          </div>
       </div>
    </div>

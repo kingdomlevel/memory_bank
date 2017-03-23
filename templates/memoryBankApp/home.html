@@ -2,9 +2,9 @@
 {% load staticfiles %}
 
 <head>
-   {% block title_block %}
-   Home
-   {% endblock %}
+    {% block title_block %}
+    Home
+    {% endblock %}
 </head>
 
 
@@ -13,115 +13,42 @@
 
 <!-- white container for all lists -->
 <div class="container">
-   <div id="homeLists">
 
-      <!-- header for white container area -->
-      <div id=homeListsHeader>
+    <div id="homeLists">
 
-         <form type="POST" action="{% url 'enhancedlist' %}">
-            <button type="submit" class="btn btn-info btn-lg" id="enhancedLink">Enhanced Lists</button>
-         </form>
-
-
-         <h1>
-            All {{ user.username }}'s Lists
-         </h1>
-
-         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> New List</button>
-      </div>
-
-      <div class="row">
-         {% if allLists %}
-         {% for list in allListsCol %}
-         <div class="col-sm-4">
-            {% for List in list %}
-            <div class="listbox">
-               <h4>
-                  {{List.title}}
-                  <!-- Delete list button -->
-                  <button type="button" class="close deleteList" data-toggle="modal" data-target="#DeleteListModal"
-                  data-title="{{ List.title }}" data-id="{{ List.id }}" >&times;</button>
-
-                  <!-- Add list item button -->
-                  <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-                  data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add item</button>
-
-
-               </h4>
-
-               <!-- <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-               data-title="{{ List.title }}" data-id="{{ List.id }}" ><b>+</b> Add item</button> -->
-               <ul>
-                  {% for item in List.listitem_set.all  %}
-                  {% if item %}
-                  {% if item.removed %}
-                  <!--Do nothing-->
-                  {% else %}
-                  {% if item.completed %}
-                  <del>
-                     <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                  </del>
-                  {% else %}
-                  <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-                  {% endif %}
-                  <hr />
-                  {% endif %}
-
-                  {% else %}
-                  <li> no items in this! </li>
-                  {% endif %}
-                  {% endfor  %}
-               </ul>
+        <!-- header for white container area -->
+        <div id=homeListsHeader>
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <form id="enhancedLink" type="POST" action="{% url 'enhancedlist' %}">
+                        <button type="submit" class="btn btn-info btn-lg" >Enhanced Lists</button>
+                    </form>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <h1>All {{ user.username }}'s Lists</h1>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <button id='new_list_modal' type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#AddListModal"><b>+</b> New List</button>
+                </div>
             </div>
-            {% endfor %}
-         </div>
-         {% endfor %}
-         {% else %}
-         <center><h3> You don't have any lists yet</h3></center>
-         {% endif %}
+        </div>
 
-
-
-
-
-
-
-
-
-
-
-         <!-- 4th Column Quicklist thingy -->
-         <div class="col-sm-3">
-            <!--<div class="listbox">
-            <li><h4><input type="checkbox" name="delete" value="listTitle">  {{List.title}}</h4></li>
-            <button type="button" class="btn btn-info btn-sm listButton" data-toggle="modal" data-target="#AddListItemModal"
-            data-title="{{ List.title }}" data-id="{{ List.id }}" >Add list item</button>
-            <ul>
-            {% for item in List.listitem_set.all  %}
-            {% if item %}
-            {% if item.removed %}-->
-            <!--Do nothing-->
-            <!--{% else %}
-            {% if item.completed %}
-            <del>
-            <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-         </del>
-         {% else %}
-         <a href="{% url 'edit_item' id=item.id %}" class="editItemToggle" data-id="{{ item.id }}">{{ item.title }}</a><br>
-         {% endif %}
-         {% endif %}
-         {% else %}
-         <li> no items in this! </li>
-         {% endif %}
-         {% endfor  %}
-      </div>-->
-
-   </div>
-
-
-
-</div> <!-- End of row -->
-</div> <!-- End of homelists -->
+        <div class="row">
+            {% if allLists %}
+                {% for list in allListsCol %}
+                    <div class="col-sm-4">
+                        {% for List in list %}
+                            <div class="listbox" id="{{ List.id }}">
+                                {% include 'memoryBankApp/update_list.html' %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <center><h3> You don't have any lists yet</h3></center>
+            {% endif %}
+        </div> <!-- End of row -->
+    </div> <!-- End of homelists -->
 </div> <!-- End of container -->
 
 
@@ -250,16 +177,20 @@
                      <input type="hidden" id="DeleteListID" name="listID" value="" /><br/>
                      <input type="hidden" id="DeleteListBool" name="listDeleteBool" value="0" /><br/>
 
-                     <button class="btn btn-primary cancelDelete" type="button">Cancel</button>
-                     <button class="btn btn-primary submitDeleteList"  type="submit" name="submitDeleteList">Delete</button>
-                  </form>
-               </div>
-               <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-               </div>
 
+                  <button class="btn btn-primary cancelDelete" type="button">Cancel</button>
+                  <button class="btn btn-primary submitDeleteList"  type="submit" name="submitDeleteList">Delete</button>
+               </form>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
          </div>
       </div>
    </div>
-   {% endblock %}
+
+</div>
+
+<script  src="{% static "memoryBankApp/quickitem-ajax.js" %}"></script>
+
+{% endblock %}

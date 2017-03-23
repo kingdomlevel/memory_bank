@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
-LOGIN_URL = '/accounts/login/'
+#LOGIN_URL = '/accounts/login/'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
@@ -28,7 +28,7 @@ SECRET_KEY = 'j%x$m2qg7obv)wbu4hzldxr(#r$zf^*r7jrrdqt!^#x$epppl@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', '.khario.pythonanywhere.com']
 
 
 # Application definition
@@ -127,11 +127,6 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-
-#Not sure about this login setting
-#LOGIN_URL = '/memorybank/login/'
-
-#From rango chapter 11, relating to 'registration redux', see page138
 
 REGISTRATION_OPEN = True
 
