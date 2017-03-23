@@ -41,7 +41,7 @@ class EditItemForm(forms.ModelForm):
 class EnhancedListForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'autofocus': 'autofocus'}),
                             max_length=EnhancedList.title_max, label="Title: ")
-    
+
     class Meta:
         model = EnhancedList
         fields = ('title', 'long_text',)
@@ -52,12 +52,8 @@ class DeleteListForm(forms.ModelForm):
 
     class Meta:
         model = List
-<<<<<<< HEAD
-        fields = ('title',)
-=======
         fields = ('title', )
 
 
 class QuickItemForm(forms.Form):
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-quick-item', 'required': True, 'placeholder': 'Quick item...'}))
->>>>>>> 6a3bbe43b3656453bb3cdbdf795c75294b057c0f
