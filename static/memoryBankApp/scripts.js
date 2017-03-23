@@ -10,7 +10,7 @@ $(document).ready(function() {
     });
 });
 
-// Copies text from the editor on the edit enhanced list  
+// Copies text from the editor on the edit enhanced list
 // page to a form field that saves to the database.
 $(document).ready(function() {
     text = $('#id_long_text');
@@ -22,7 +22,7 @@ $(document).ready(function() {
 // triggered by the 'x' in the listboxes and sets
 // a boolean field to true so that it no longer
 // appears on the home page.
-$(document).ready(function() { 
+$(document).ready(function() {
     $('.deleteList').click(function(e) {
         target = $(e.target);
         title = target.attr('data-title');
@@ -30,35 +30,40 @@ $(document).ready(function() {
         $('#deleteItemTitle').text('Are you sure you want to delete "' + title+'"');
         $('#DeleteListID').val(id);
         $('#DeleteListBool').val('1');
-
     });
 });
 
-
-// Redirects back to home if the user clicks 
-// the cancel button 
+// Redirects back to home if the user clicks
+// the cancel button
 $(document).ready(function() {
       $('.cancelEdit').click(function() {
-      window.location.href = "/memorybank/home";       
+      window.location.href = "/memorybank/home";
       });
   });
 
-// Redirects back to home if the user clicks 
-// the cancel button 
+  // Redirects back to enhancedlist if the user clicks
+  // the cancel button
+  $(document).ready(function() {
+        $('.cancelEnhancedEdit').click(function() {
+        window.location.href = "/memorybank/enhancedlist";
+        });
+    });
+
+// Redirects back to home if the user clicks
+// the cancel button
 $(document).ready(function() {
       $('.cancelDelete').click(function() {
-      window.location.href = "/memorybank/home";       
+      window.location.href = "/memorybank/home";
       });
   });
 
-// triggers confirmation page before deleting a list
+// Confirms the delete for the list
 $(document).ready(function() {
     $('.submitDelete').click(function() {
         if (confirm("Are you sure you want to delete this item?")){
-          $('#removeFormField').val('1');        
+          $('#removeFormField').val('1');
           document.getElementById("ListForm").submit();
         }
-                    
     });
 });
 
@@ -86,4 +91,3 @@ $(document).ready(function() {
         }
     });
 });
-

@@ -15,18 +15,18 @@ Edit Enhanced List
 
                {{ form.title.label }}
                {{ form.title }}<br/><br/>
-               
+
                <div id="hiddentext">
                     {{ form.long_text }}
-               </div>               
+               </div>
 
                <textarea id="editor1" name="editor1"></textarea>
                <script>
                CKEDITOR.replace( 'editor1' );
                </script>
                <br />
+               <button class="btn btn-primary cancelEnhancedEdit" type="button">Cancel</button>
                <button class="btn btn-primary submitEnhanced" type="submit" name="submitEnhanced">Save</button>
-            </form>
          </div>
       </div>
    </div>

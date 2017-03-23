@@ -43,18 +43,16 @@ def home(request, id=None):
 	#gets all of users lists
 	allLists = List.objects.filter(user=request.user, removed='0')
 	allLists = allLists.order_by('-modified_date')
-	listCount = len(allLists)		# gets total number of lists
 
-	#Creates a matrix of all the lists for displaying in the template
+	#Creates a matrix of all the lists for displaying in each column of the template
 	allListsCol = []
 	cols = 3
 	for i in range(cols):
 		allListsCol.append(allLists[i::cols])
 
 	context_dict = {'allLists': allLists, 'allListsCol': allListsCol,
-					'listCount': listCount, 'form': newItemform,
-					'ListForm': newListForm, 'quick_item_form': quick_item_form,
-					'banklist': bankTitleList, }
+					'banklist': bankTitleList, 'form': newItemform,
+					'ListForm': newListForm, 'quick_item_form': quick_item_form,}
 
 	return render(request, 'memoryBankApp/home.html', context_dict)
 
@@ -185,7 +183,7 @@ def edit_enhanced_list(request, id=None):
 			instance.long_text = text
 			instance.save()
 			return HttpResponseRedirect('/memorybank/home')
-	context={'form': enhanced_list_form,}
+	context={'form': enhanced_list_form, }
 
 	return render(request,'memoryBankApp/editenhancedlist.html', context )
 

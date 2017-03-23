@@ -123,12 +123,6 @@
    text-align: center;
 }
 
-
-
-
-
-
-
 /* User's Home Page (home.html) */
 #homeLists {
    background-color: #fff;
@@ -155,28 +149,11 @@ h1 {
    color: #090909;
    font-size: 1.6em;
    text-align: center;
-   word-break:break-all;
-}
-@media screen and (max-width: 767px){
-   h1{
-      margin-left: 20px;
-      text-align: left;
-   }
 }
 
-/* create new list button */
-#homeListsHeader .btn-group-lg>.btn, .btn-lg {
-   float: right;
-   margin: -50px 30px 0 0;
+/* lg buttons in header */
+#homeListsHeader .btn-lg {
    font-size: 14px;
-   line-height: 1.3333333;
-}
-#enhancedLink  {
-   float: left;
-   margin: 10px 0 0 30px;
-   /*margin: -50px 30px 0 0;
-   font-size: 14px;
-   line-height: 1.3333333;*/
 }
 
 

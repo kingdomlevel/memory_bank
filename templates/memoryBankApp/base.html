@@ -12,8 +12,12 @@
    </title>
 
 
-    <!-- Compiled and minified CSS -->
+    <!-- Compiled and minified bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!--Link to CSS style sheet-->
+    <link rel="stylesheet" href="{% static "memoryBankApp/style.css" %}" />
+
     <!-- j-query libraries -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
@@ -23,13 +27,10 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!--Link to Java Script File -->
-    <script  src='/static/memoryBankApp/scripts.js'></script>
+    <script  src="{% static "memoryBankApp/scripts.js" %}"></script>
 
     <!--Script for ckeditor used for Enhanced Lists-->
     <script src="https://cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
-
-    <!--Link to CSS style sheet-->
-    <link rel="stylesheet" href="{% static "memoryBankApp/style.css" %}" />
 
 </head>
 

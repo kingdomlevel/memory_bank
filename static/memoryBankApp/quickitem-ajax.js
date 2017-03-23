@@ -1,9 +1,9 @@
 // AJAX for posting
 function create_post(form) {
     var list_id = $(form).closest(".listbox").prop("id");
-    var list_el_id = "#" + (list_id);
-    var input = $(list_el_id).find("#id_title");
-    var title = (input).val();
+    var list_el_id = "#" + (list_id);   // used to select element from DOM
+    var input = $(list_el_id).find("#id_title");    // quick item input field
+    var title = (input).val();  // title of item
 
     $.ajax({
         url : "/memorybank/quick_item/", // the endpoint
@@ -13,7 +13,7 @@ function create_post(form) {
         // handle a successful response
         success : function() {
             $(list_el_id).load("/memorybank/update_list/", {'list_id' : list_id}, function() {
-                $(list_el_id).find("#id_title").focus();
+                $(list_el_id).find("#id_title").focus();    // focus back on quickitem form
             });
         },
 
@@ -26,7 +26,7 @@ function create_post(form) {
     });
 };
 
-// Submit post on submit
+// Attach event handler for form submissions to all .listbox
 $('.listbox').on('submit', function(event){
     event.preventDefault();     // stop form posting to view
     create_post(event.target);  // pass form to ajax
