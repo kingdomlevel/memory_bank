@@ -45,6 +45,17 @@
 }
 
 
+/* Styles for add list item widget */
+.modal-body #banktitle {
+   /*float:right;*/
+   margin-left: auto;
+}
+
+.modal-body .btn {
+   margin-top: -40px;
+   float: right;
+}
+
 /* Styles for edit list item page */
 .centre-wide .col-sm-6,
 .centre-wide .col-sm-offset-2 {

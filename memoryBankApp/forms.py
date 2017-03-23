@@ -20,7 +20,7 @@ class ListItemForm(forms.ModelForm):
     priority = forms.ChoiceField(choices=priority_list, help_text="How important is this?")
     notes = forms.CharField(widget=forms.Textarea, max_length=ListItem.notes_max,
                             help_text="Any additional information?", required=False)
-    date = forms.DateField(widget=forms.SelectDateWidget, initial=date.today,)
+    date = forms.DateField(widget=forms.SelectDateWidget, help_text="Add a due date:", initial=date.today,)
     class Meta:
         model = ListItem
         fields = ( 'date', 'priority', 'notes',)
