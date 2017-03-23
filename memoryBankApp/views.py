@@ -120,6 +120,11 @@ def quick_item(request):
 			# new list item with default values except title
 			new_item = ListItem(list=list, title=title, date=datetime.now(), priority='low', notes='', created_date=datetime.now(), modified_date=datetime.now())
 			new_item.save()
+			# Add the title of the list item to the bank (BankItems model)
+			bankTitle = title
+			bankItem = BankItem.objects.create(title=bankTitle)
+			bankItem.user = request.user
+			bankItem.save()
 		except Exception as e:
 	    		print '%s (%s)' % (e.message, type(e))
 	return render(request, 'memoryBankApp/update_list.html', {'List' : list, 'new_item' : new_item})
