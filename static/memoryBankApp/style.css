@@ -155,7 +155,7 @@ h1 {
    color: #090909;
    font-size: 1.6em;
    text-align: center;
-
+   word-break:break-all;
 }
 @media screen and (max-width: 767px){
    h1{

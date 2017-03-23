@@ -114,18 +114,17 @@ def add_item(newItemform,request):
 #AJAX powered function to allow instant addition of list item
 @login_required
 def quick_item(request):
-	quick_item_form = QuickItemForm()
 	if request.method == 'POST':
 		try:
 			title = request.POST.get('title', '')
 			list_id = request.POST.get('list_id', '')
 			list = List.objects.get(pk=list_id)
 			# new list item with default values except title
-			newItem = ListItem(list=list, title=title, date=datetime.now(), priority='low', notes='', created_date=datetime.now(), modified_date=datetime.now())
-			newItem.save()
+			new_item = ListItem(list=list, title=title, date=datetime.now(), priority='low', notes='', created_date=datetime.now(), modified_date=datetime.now())
+			new_item.save()
 		except Exception as e:
 	    		print '%s (%s)' % (e.message, type(e))
-	return render(request, 'memoryBankApp/update_list.html', {'List' : list})
+	return render(request, 'memoryBankApp/update_list.html', {'List' : list, 'new_item' : new_item})
 
 
 @login_required

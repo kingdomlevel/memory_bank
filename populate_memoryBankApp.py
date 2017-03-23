@@ -86,27 +86,3 @@ def add_mike():
 if __name__ == '__main__':
     print("Starting memory bank pop script..")
     populate()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

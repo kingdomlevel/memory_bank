@@ -12,7 +12,8 @@
 
 <ul>
 
-    <form class="quick_item_form" method="post" action="">
+    <!-- Action prevented through js to use AJAX -->
+    <form class="quick_item_form" method="post" action="/memorybank/quick_item/">
         {% csrf_token %}
         {% for hidden in quick_item_form.hidden_fields %}
             {{ hidden }}
