@@ -286,3 +286,8 @@ never eat shredded wheat */
     border: 1px solid #dddddd;
     width: 100px;
 }
+
+/*correct text area resizing*/
+#id_notes {
+   width: 200px;
+}
